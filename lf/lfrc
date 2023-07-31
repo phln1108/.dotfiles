@@ -115,7 +115,7 @@ cmd zip ${{
 map c copy
 map x cut
 map p paste
-map z clear
+map <c-z> clear
 map r rename
 map DD delete
 map R reload
