@@ -433,8 +433,10 @@ for i = 1, 9 do
                   function ()
                       local screen = awful.screen.focused()
                       local tag = screen.tags[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
+		      local tag_to = client.focus.screen.tags[i] 
+                      if tag and client.focus and tag_to then
+                         client.focus:move_to_tag(tag)
+			 tag:view_only()
                       end
                   end,
                   {description = "toggle tag #" .. i, group = "tag"}),
