@@ -49,7 +49,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "vi"
+editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
 
@@ -64,17 +64,17 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.fair,
     awful.layout.suit.spiral,
-    awful.layout.suit.tile,
     awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.max,
+    --awful.layout.suit.max.fullscreen,
+    --awful.layout.suit.magnifier,
+    --awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -247,10 +247,34 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey, "Shift"   }, "Tab",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Tab",  awful.tag.viewnext,
+-- pass only for the tags that have something in it
+    awful.key({ modkey,           }, "Tab",  function ()
+						local initial_tag_index = awful.screen.focused().selected_tag.index
+						while (true) do
+							awful.tag.viewnext()
+							local current_tag = awful.screen.focused().selected_tag
+							local current_tag_index = current_tag.index
+							if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
+								return
+							end
+						end
+					end,
               {description = "view next", group = "tag"}),
+
+    awful.key({ modkey, "Shift"   }, "Tab", function ()
+						local initial_tag_index = awful.screen.focused().selected_tag.index
+						while (true) do
+							awful.tag.viewprev()
+							local current_tag = awful.screen.focused().selected_tag
+							local current_tag_index = current_tag.index
+							if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
+								return
+							end
+						end
+					    end,
+              {description = "view previous", group = "tag"}),
+
+
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
@@ -506,7 +530,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -521,7 +545,7 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
+    c.shape = gears.shape.rounded_rect
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
@@ -571,12 +595,42 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+--client.connect_signal("mouse::enter", function(c)
+--    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+--end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+-- Manage titlebar for clients
+function toggle_titlebar(c)
+    if c.floating then
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
+    end
+end
+client.connect_signal("property::floating", toggle_titlebar)
+
+-- Manage bars for fullscreen clients
+function toggle_bars(c)
+    if c.fullscreen then
+        awful.titlebar.hide(c)
+        c.screen.mywibox.visible = false
+    else
+        if c.floating then
+            awful.titlebar.show(c)
+        end
+
+        c.screen.mywibox.visible = true
+    end
+end
+
+client.connect_signal("manage", toggle_bars)
+client.connect_signal("focus", toggle_bars)
+client.connect_signal("property::floating", toggle_bars)
+client.connect_signal("property::fullscreen", toggle_bars)
+
 -- }}}
 
 
@@ -585,3 +639,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 beautiful.useless_gap = 5
 beautiful.gap_single_client = true
 
+-- Autostart applications
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
