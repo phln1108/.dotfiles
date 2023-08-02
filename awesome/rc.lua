@@ -245,7 +245,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "h",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 -- pass only for the tags that have something in it
     awful.key({ modkey,           }, "Tab",  function ()
@@ -304,16 +304,15 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    --awful.key({ modkey,           }, "Tab",
-    --    function ()
-    --        awful.client.focus.history.previous()
-    --        if client.focus then
-    --            client.focus:raise()
-    --        end
-    --    end,
-    --    {description = "go back", group = "client"}),
-
-    -- Standard program
+--    awful.key({ modkey,           }, "Tab",
+--        function ()
+--            awful.client.focus.history.previous()
+--            if client.focus then
+--                client.focus:raise()
+--            end
+--        end,
+--        {description = "go back", group = "client"}),
+     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -321,22 +320,22 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-              {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-              {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-              {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-              {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
+--    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+--              {description = "increase master width factor", group = "layout"}),
+--    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+--              {description = "decrease master width factor", group = "layout"}),
+--    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
+--              {description = "increase the number of master clients", group = "layout"}),
+--    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
+--             {description = "decrease the number of master clients", group = "layout"}),
+--    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+--              {description = "increase the number of columns", group = "layout"}),
+--    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+--              {description = "decrease the number of columns", group = "layout"}),
+--    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+--              {description = "select next", group = "layout"}),
+--    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+--              {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -382,7 +381,7 @@ clientkeys = gears.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey,           }, "s",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
@@ -635,11 +634,27 @@ client.connect_signal("property::fullscreen", toggle_bars)
 
 -- }}}
 
-
-
-
+--setup round window border
 beautiful.useless_gap = 5
 beautiful.gap_single_client = true
 
+-- Turn off annoying beep
+awful.spawn.with_shell("xset b off", false)
+
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+
+--set background
+awful.screen.connect_for_each_screen(function(s)
+    for t = 1,9 do
+        s.tags[t]:connect_signal("property::selected", function (tag)
+            if not tag.selected then return end
+            wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
+            gears.wallpaper.maximized(wallpaper_path,s)
+        end)
+    end
+end)
+
+
+
+
