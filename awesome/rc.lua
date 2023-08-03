@@ -43,6 +43,7 @@ do
 end
 -- }}}
 
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
@@ -248,30 +249,49 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "h",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 -- pass only for the tags that have something in it
-    awful.key({ modkey,           }, "Tab",  function ()
-						local initial_tag_index = awful.screen.focused().selected_tag.index
-						while (true) do
-							awful.tag.viewnext()
-							local current_tag = awful.screen.focused().selected_tag
-							local current_tag_index = current_tag.index
-							if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
-								return
-							end
-						end
-					end,
+    awful.key({ modkey,           }, "Tab", function ()
+                                                local screen = awful.screen.focused()
+                                            	local current_tag = screen.selected_tag 
+                                            	local tags = screen.tags
+                                            	local pass = false
+                                            	local go_to = current_tag
+                                            	for _,tag in ipairs(tags) do
+                                            		if tag == current_tag then
+                                            			pass = true
+                                            		elseif #tag:clients() > 0 then
+                                            			if pass then
+                                            				go_to = tag
+                                            				break
+                                            			elseif current_tag == go_to then
+                                            			    go_to = tag 
+                                                        end
+                                                    end
+                                            	end
+                                            	go_to:view_only()
+                                            end,
               {description = "view next", group = "tag"}),
 
     awful.key({ modkey, "Shift"   }, "Tab", function ()
-						local initial_tag_index = awful.screen.focused().selected_tag.index
-						while (true) do
-							awful.tag.viewprev()
-							local current_tag = awful.screen.focused().selected_tag
-							local current_tag_index = current_tag.index
-							if #current_tag:clients() > 0 or current_tag_index == initial_tag_index then
-								return
-							end
-						end
-					    end,
+                                                local screen = awful.screen.focused()
+                                            	local current_tag = screen.selected_tag 
+                                            	local tags = screen.tags
+                                            	local pass = false
+                                            	local go_to = current_tag
+                                                	for i = #tags ,1,-1 do
+                                                	    tag = tags[i]
+                                                		if tag == current_tag then
+                                                			pass = true
+                                                		elseif #tag:clients() > 0 then
+                                                			if pass then
+                                                				go_to = tag
+                                                				break
+                                                			elseif current_tag == go_to then
+                                                			    go_to = tag 
+                                                            end
+                                                        end
+                                                	end
+                                                	go_to:view_only()
+                                                end,
               {description = "view previous", group = "tag"}),
 
 
