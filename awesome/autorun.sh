@@ -11,9 +11,8 @@ HOME=$HOME
 #settings for computer from vortex
 if HOME="home/pedroh"; then
     run "xrandr" --output DP-1 --primary --left-of VGA-1 
-else
-    echo "deu ruim ($HOME)" 
 fi
 
+run "picom"
 
 
