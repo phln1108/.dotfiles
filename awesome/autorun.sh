@@ -9,10 +9,11 @@ run() {
 HOME=$HOME
 
 #settings for computer from vortex
-if HOME="home/pedroh"; then
+if [ HOME == "home/pedroh" ]; then
+    echo "kkkkk"
     run "xrandr" --output DP-1 --primary --left-of VGA-1 
 fi
 
-run "picom"
+run "picom" --config ~/.config/picom/picom.conf
 
 
