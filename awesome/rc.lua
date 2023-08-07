@@ -293,6 +293,18 @@ globalkeys = gears.table.join(
                                                 	go_to:view_only()
                                                 end,
               {description = "view previous", group = "tag"}),
+	awful.key({modkey,            }, "z",	function()
+												local screen = awful.screen.focused()
+                                            	local tags = screen.tags
+                                            	for _,tag in ipairs(tags) do
+                                            		if #tag:clients() == 0 then
+														tag:view_only()
+                                    					break
+                                                    end
+                                            	end
+                                            end,
+			  {description = "move client to first empty tag", group = "tag"}), 
+
 	awful.key({modkey,  "Shift"   }, "z",	function()
 												if client.focus then
 													local screen = awful.screen.focused()
