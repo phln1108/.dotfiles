@@ -237,11 +237,11 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
+--root.buttons(gears.table.join(
+--    awful.button({ }, 3, function () mymainmenu:toggle() end),
+--    awful.button({ }, 4, awful.tag.viewnext),
+--    awful.button({ }, 5, awful.tag.viewprev)
+--))
 -- }}}
 
 -- {{{ Key bindings
@@ -293,7 +293,33 @@ globalkeys = gears.table.join(
                                                 	go_to:view_only()
                                                 end,
               {description = "view previous", group = "tag"}),
-
+	awful.key({modkey,  "Shift"   }, "z",	function()
+												if client.focus then
+													local screen = awful.screen.focused()
+	                                            	local tags = screen.tags
+	                                            	for _,tag in ipairs(tags) do
+	                                            		if #tag:clients() == 0 then
+	                                    						client.focus:move_to_tag(tag)
+																break
+	                                                    end
+	                                            	end
+	                                            end
+                                            end,
+			  {description = "move client to first empty tag", group = "tag"}), 
+	awful.key({modkey,  "Control" }, "z",	function()
+												if client.focus then
+													local screen = awful.screen.focused()
+	                                            	local tags = screen.tags
+	                                            	for _,tag in ipairs(tags) do
+	                                            		if #tag:clients() == 0 then
+	                                    						client.focus:move_to_tag(tag)
+																tag:view_only()
+																break
+	                                                    end
+	                                            	end
+	                                            end
+                                            end,
+			  {description = "move client to first empty tag and go with it ", group = "tag"}), 
 
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),

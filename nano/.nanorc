@@ -1,0 +1,9 @@
+#my config for nano
+
+set linenumbers
+set autoindent
+set softwrap
+set tabsize 4
+
+#set tabstospaces
+
