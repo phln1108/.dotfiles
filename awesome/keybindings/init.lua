@@ -1,0 +1,5 @@
+require('pkgs')
+require('keybindings.client')
+require('keybindings.global')
+require('keybindings.tags')
+root.keys(globalkeys)
