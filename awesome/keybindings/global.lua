@@ -1,5 +1,20 @@
 require('pkgs')
 
+function create_tag ()
+    new_tag = awful.tag.add("⦿", {
+        screen = awful.screen.focused(),
+        layout = awful.layout.suit.fair })
+        new_tag:connect_signal("property::selected", function (tag)
+            if not tag.selected then 
+                if #tag:clients() == 0 then tag:delete() end
+                return 
+            end
+            wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
+            gears.wallpaper.maximized(wallpaper_path,s)
+        end)
+    return new_tag
+end
+
 globalkeys = gears.table.join(
 
     awful.key(  { modkey ,}, "h", hotkeys_popup.show_help,
@@ -56,9 +71,11 @@ globalkeys = gears.table.join(
                                     for _,tag in ipairs(tags) do
                                         if #tag:clients() == 0 then
                                             tag:view_only()
-                                            break
+                                            return
                                         end
                                     end
+                                    new_tag = create_tag()
+                                    new_tag:view_only()
                                 end,
 			    {description = "move client to first empty tag", group = "tag"}), 
 
@@ -69,9 +86,11 @@ globalkeys = gears.table.join(
 	                                            	for _,tag in ipairs(tags) do
 	                                            		if #tag:clients() == 0 then
 	                                    						client.focus:move_to_tag(tag)
-																break
+																return
 	                                                    end
 	                                            	end
+                                                    new_tag = create_tag()
+                                                    client.focus:move_to_tag(new_tag)
 	                                            end
                                             end,
 			    {description = "move client to first empty tag", group = "tag"}),
@@ -84,9 +103,12 @@ globalkeys = gears.table.join(
 	                                            		if #tag:clients() == 0 then
 	                                    						client.focus:move_to_tag(tag)
 																tag:view_only()
-																break
+																return
 	                                                    end
 	                                            	end
+                                                    new_tag = create_tag()
+                                                    client.focus:move_to_tag(new_tag)
+                                                    new_tag:view_only()
 	                                            end
                                             end,
 			    {description = "move client to first empty tag and go with it ", group = "tag"}),

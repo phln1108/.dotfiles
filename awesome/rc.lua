@@ -104,7 +104,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.tags[t]:connect_signal("property::selected", function (tag)
                 if not tag.selected then return end
                 wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
-                gears.wallpaper.maximized(wallpaper_path,s)
+                gears.wallpaper.maximized(wallpaper_path,true)
             end)
         end
     end
@@ -189,14 +189,14 @@ awful.spawn.with_shell("xset b off", false)
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 --set background
--- awful.screen.connect_for_each_screen(function(s)
---     for t = 1,9 do
---         if s.tags[t] then
---             s.tags[t]:connect_signal("property::selected", function (tag)
---                 if not tag.selected then return end
---                 wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
---                 gears.wallpaper.maximized(wallpaper_path,s)
---             end)
---         end
---     end
--- end)
+awful.screen.connect_for_each_screen(function(s)
+    for t = 1,9 do
+        if s.tags[t] then
+            s.tags[t]:connect_signal("property::selected", function (tag)
+                if not tag.selected then return end
+                wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
+                gears.wallpaper.maximized(wallpaper_path,s)
+            end)
+        end
+    end
+end)

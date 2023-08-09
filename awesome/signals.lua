@@ -66,6 +66,8 @@ function toggle_titlebar(c)
 end
 client.connect_signal("property::floating", toggle_titlebar)
 
+
+
 -- Manage bars for fullscreen clients
 function toggle_bars(c)
     if c.fullscreen then
