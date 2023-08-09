@@ -98,19 +98,25 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    set_wallpaper(s)
-    for t = 1,9 do
+    -- set_wallpaper(s)
+
+    -- Each screen has its own tag table.
+    awful.tag({ "⦿", "○", "○"}, s, awful.layout.layouts[1])
+
+    for t = 1,#s.tags do
         if s.tags[t] then
             s.tags[t]:connect_signal("property::selected", function (tag)
-                if not tag.selected then return end
+                if not tag.selected then
+                    tag.name = "○"
+                    return 
+                end
+                tag.name = "⦿"
                 wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
-                gears.wallpaper.maximized(wallpaper_path,true)
+                gears.wallpaper.maximized(wallpaper_path,s,true)
+                tag:view_only()
             end)
         end
     end
-
-    -- Each screen has its own tag table.
-    awful.tag({ "⦿", "⦿", "⦿"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -137,7 +143,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s ,height = 25})
     
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -189,14 +195,15 @@ awful.spawn.with_shell("xset b off", false)
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
 --set background
-awful.screen.connect_for_each_screen(function(s)
-    for t = 1,9 do
-        if s.tags[t] then
-            s.tags[t]:connect_signal("property::selected", function (tag)
-                if not tag.selected then return end
-                wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
-                gears.wallpaper.maximized(wallpaper_path,s)
-            end)
-        end
-    end
-end)
+-- awful.screen.connect_for_each_screen(function(s)
+--     for t = 1,9 do
+--         if s.tags[t] then
+--             s.tags[t]:connect_signal("property::selected", function (tag)
+--                 if not tag.selected then return end
+--                 wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
+--                 gears.wallpaper.maximized(wallpaper_path,s)
+--                 tag:view_only()
+--             end)
+--         end
+--     end
+-- end)

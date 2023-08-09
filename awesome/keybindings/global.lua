@@ -1,16 +1,21 @@
 require('pkgs')
 
 function create_tag ()
-    new_tag = awful.tag.add("⦿", {
+    new_tag = awful.tag.add("○", {
+        -- icon_only = true,
+        -- icon = "/home/pedroh/Downloads/em-linha-reta.png",
         screen = awful.screen.focused(),
         layout = awful.layout.suit.fair })
         new_tag:connect_signal("property::selected", function (tag)
             if not tag.selected then 
+                tag.name = "○"
                 if #tag:clients() == 0 then tag:delete() end
                 return 
             end
+            tag.name = "⦿"
             wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
             gears.wallpaper.maximized(wallpaper_path,s)
+            tag:view_only()
         end)
     return new_tag
 end
@@ -21,47 +26,14 @@ globalkeys = gears.table.join(
                 {description="show help", group="awesome"}),
 
     awful.key(  { modkey ,},"Tab",   function ()
-                                        local screen = awful.screen.focused()
-                                        local current_tag = screen.selected_tag 
-                                        local tags = screen.tags
-                                        local pass = false
-                                        local go_to = current_tag
-                                        for _,tag in ipairs(tags) do
-                                            if tag == current_tag then
-                                                pass = true
-                                            elseif #tag:clients() > 0 then
-                                                if pass then
-                                                    go_to = tag
-                                                    break
-                                                elseif current_tag == go_to then
-                                                    go_to = tag 
-                                                end
-                                            end
-                                        end
-                                        go_to:view_only()
+                                        s = awful.screen.focused()
+                                        awful.tag.viewnext(s)
                                     end,
                 {description = "view next tag that have something in it", group = "tag"}),
 
     awful.key(  { modkey , "Shift" },"Tab",   function ()
-                                                local screen = awful.screen.focused()
-                                                local current_tag = screen.selected_tag 
-                                                local tags = screen.tags
-                                                local pass = false
-                                                local go_to = current_tag
-                                                    for i = #tags ,1,-1 do
-                                                        tag = tags[i]
-                                                        if tag == current_tag then
-                                                            pass = true
-                                                        elseif #tag:clients() > 0 then
-                                                            if pass then
-                                                                go_to = tag
-                                                                break
-                                                            elseif current_tag == go_to then
-                                                                go_to = tag 
-                                                            end
-                                                        end
-                                                    end
-                                                    go_to:view_only()
+                                                s = awful.screen.focused()
+                                                awful.tag.viewprev(s)
                                             end,
                 {description = "view previous tag that have something in it", group = "tag"}),
 
