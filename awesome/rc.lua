@@ -30,15 +30,37 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
--- baterry widget
-local battery_widget = require("widgets.battery-widget")
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+
+-- baterry widget check if im using the laptop or the pc, 
+-- to show or not the widget
+local get_batery = function ()
+    local path = io.popen("echo $HOME"):read("*all")
+
+    if path == "/home/ph\n" then
+        return require("widgets.battery-widget"){
+            ac_prefix = "+Bat:",
+            battery_prefix = "-Bat:",
+            percent_colors = {
+                { 25, "red"   },
+                { 50, "orange"},
+                {999, "green" },
+            },
+            listen = true,
+            timeout = 10,
+            widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
+            tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
+        }
+    end
+    return nil
+end
+
+local battery_widget = get_batery() 
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -98,7 +120,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
-    -- set_wallpaper(s)
+    set_wallpaper(s)
 
     -- Each screen has its own tag table.
     awful.tag({ "⦿", "○", "○"}, s, awful.layout.layouts[1])
@@ -157,19 +179,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-	    battery_widget {
-		ac_prefix = "+Bat:",
-    		battery_prefix = "-Bat:",
-    		percent_colors = {
-    		    { 25, "red"   },
-    		    { 50, "orange"},
-    		    {999, "green" },
-    		},
-    		listen = true,
-    		timeout = 10,
-    		widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
-    		tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
-	    },
+            
+            battery_widget,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
