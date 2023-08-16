@@ -4,7 +4,7 @@ require('error-handling')
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "mytheme/theme.lua")
 
 -- }}}
 
@@ -171,13 +171,19 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
+        {
+            layout = wibox.layout.fixed.horizontal,
+            s.mytasklist,
+            s.mypromptbox,
+        },
+        -- wibox.container.place
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             --mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            
         },
-        s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             
