@@ -206,6 +206,9 @@ awful.spawn.with_shell("xset b off", false)
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
+beautiful.tasklist_disable_task_name = true
+
+
 --set background
 -- awful.screen.connect_for_each_screen(function(s)
 --     for t = 1,9 do

@@ -1,6 +1,6 @@
 require('pkgs')
 
-for i = 1, 9 do
+for i = 1, #awful.screen.focused().tags do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
