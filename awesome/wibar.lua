@@ -13,8 +13,9 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 local get_batery = function ()
     local path = io.popen("echo $HOME"):read("*all")
 
-    if path == "/home/ph\n" then
+    if path == "/home/ph\n" or true then
         return require("widgets.battery-widget"){
+            bg = beautiful.bg_normal,
             ac_prefix = "+Bat:",
             battery_prefix = "-Bat:",
             percent_colors = {
@@ -31,7 +32,9 @@ local get_batery = function ()
     return nil
 end
 
-local battery_widget = get_batery() 
+local battery_widget = get_batery()
+
+local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -213,11 +216,13 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spacer(false,false,false,true),
-            wibox.container.background(battery_widget,beautiful.bg_normal),
+                  
+            -- wibox.container.background(battery_widget,beautiful.bg_normal),
             wibox.container.background(mykeyboardlayout,beautiful.bg_normal),
             wibox.container.background(wibox.widget.systray(),beautiful.bg_normal),
             wibox.container.background(mytextclock,beautiful.bg_normal),
-            spacer(false,false,false,false),
+            wibox.container.background(logout_menu_widget(),beautiful.bg_normal),
+            -- spacer(false,false,false,false),
         },
     }
 end)
