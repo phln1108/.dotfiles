@@ -41,8 +41,12 @@ local popup = awful.popup {
     border_color = beautiful.bg_focus,
     maximum_width = 400,
     offset = { y = 5 },
-    widget = {}
+    widget = {},
+    hide_on_right_click = true
 }
+
+local click_to_hide = require("helpers.click_to_hide")
+click_to_hide(popup, nil, true)
 
 local function worker(user_args)
     local rows = { layout = wibox.layout.fixed.vertical }
@@ -123,7 +127,7 @@ local function worker(user_args)
                             logout_menu_widget:set_bg('#00000000')
                         else
                             popup:move_next_to(mouse.current_widget_geometry)
-                            logout_menu_widget:set_bg(beautiful.bg_focus)
+                            logout_menu_widget:set_bg(beautiful.bg_normal)
                         end
                     end)
             )

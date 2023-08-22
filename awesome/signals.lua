@@ -90,3 +90,4 @@ client.connect_signal("focus", toggle_bars)
 client.connect_signal("property::floating", toggle_bars)
 client.connect_signal("property::fullscreen", toggle_bars)
 
+

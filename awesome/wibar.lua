@@ -36,6 +36,13 @@ local battery_widget = get_batery()
 
 local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
 
+local brightness_widget = require("widgets.brightness-widget.brightness")
+
+local todo_widget = require("widgets.todo-widget.todo")
+
+
+local volume_widget = require("widgets.volume-widget.volume")
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -92,13 +99,13 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-local teste = {
+local teste = wibox.widget{
     text   = '  ',
     widget = wibox.widget.textbox
 }
 
 function spacer (tl,tr,br,bl)
-    return {
+    return wibox.widget{
         teste,
         widget = wibox.container.background,
         bg = beautiful.bg_normal,
@@ -106,7 +113,23 @@ function spacer (tl,tr,br,bl)
             gears.shape.partially_rounded_rect(cr,w,h,tl,tr,br,bl)
         end,
     }
-end 
+    -- return wibox.container.background(teste,beautiful.bg_normal)
+end
+
+local task_spacer1 = spacer(false,false,false,true)
+local task_spacer2 = spacer(false,false,true,false)
+
+client.connect_signal("list",function ()
+    local tag = awful.screen.focused().selected_tag
+    if #tag:clients() > 0 then
+        task_spacer1.opacity = 1
+        task_spacer2.opacity = 1
+    else
+        task_spacer1.opacity = 0
+        task_spacer2.opacity = 0
+    end
+end)
+
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -122,6 +145,13 @@ awful.screen.connect_for_each_screen(function(s)
                     tag.name = "○"
                     return 
                 end
+                if #tag:clients() > 0 then
+                    task_spacer1.opacity = 1
+                    task_spacer2.opacity = 1
+                else
+                    task_spacer1.opacity = 0
+                    task_spacer2.opacity = 0
+                end
                 tag.name = "⦿"
                 wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
                 gears.wallpaper.maximized(wallpaper_path,s,true)
@@ -129,6 +159,8 @@ awful.screen.connect_for_each_screen(function(s)
             end)
         end
     end
+
+    
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -201,13 +233,13 @@ awful.screen.connect_for_each_screen(function(s)
         },
         {
             layout = wibox.layout.fixed.horizontal,
-            spacer(false,false,false,true),
+            task_spacer1,
             {
                 widget = wibox.container.background,
                 bg     = beautiful.bg_normal,
                 s.mytasklist,
             },
-            spacer(false,false,true,false),
+            task_spacer2,
 
             
         },
@@ -218,7 +250,18 @@ awful.screen.connect_for_each_screen(function(s)
             spacer(false,false,false,true),
                   
             -- wibox.container.background(battery_widget,beautiful.bg_normal),
+            wibox.container.background(brightness_widget{
+                tooltip = true,
+                program = "brightnessctl",
+                type    = "arc",
+                percentage = true,
+            },beautiful.bg_normal),
+            wibox.container.background(todo_widget(),beautiful.bg_normal),
             wibox.container.background(mykeyboardlayout,beautiful.bg_normal),
+            wibox.container.background(volume_widget{
+                widget_type = "horizontal_bar",
+                with_icon = true
+            },beautiful.bg_normal),
             wibox.container.background(wibox.widget.systray(),beautiful.bg_normal),
             wibox.container.background(mytextclock,beautiful.bg_normal),
             wibox.container.background(logout_menu_widget(),beautiful.bg_normal),

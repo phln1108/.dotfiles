@@ -12,6 +12,13 @@ function create_tag ()
                 if #tag:clients() == 0 then tag:delete() end
                 return 
             end
+            if #tag:clients() > 0 then
+                task_spacer1.opacity = 1
+                task_spacer2.opacity = 1
+            else
+                task_spacer1.opacity = 0
+                task_spacer2.opacity = 0
+            end
             tag.name = "⦿"
             wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
             gears.wallpaper.maximized(wallpaper_path,s)
