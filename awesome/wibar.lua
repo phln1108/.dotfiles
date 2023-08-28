@@ -116,22 +116,27 @@ function spacer (tl,tr,br,bl)
     -- return wibox.container.background(teste,beautiful.bg_normal)
 end
 
-local task_spacer1 = spacer(false,false,false,true)
-local task_spacer2 = spacer(false,false,true,false)
-
-client.connect_signal("list",function ()
-    local tag = awful.screen.focused().selected_tag
-    if #tag:clients() > 0 then
-        task_spacer1.opacity = 1
-        task_spacer2.opacity = 1
-    else
-        task_spacer1.opacity = 0
-        task_spacer2.opacity = 0
-    end
-end)
-
 
 awful.screen.connect_for_each_screen(function(s)
+
+    local task_spacer1 = spacer(false,false,false,true)
+    local task_spacer2 = spacer(false,false,true,false)
+
+    task_spacer1.opacity = 0
+    task_spacer2.opacity = 0
+
+    client.connect_signal("list",function ()
+        local tag = awful.screen.focused().selected_tag
+        if #tag:clients() > 0 then
+            task_spacer1.opacity = 1
+            task_spacer2.opacity = 1
+        else
+            task_spacer1.opacity = 0
+            task_spacer2.opacity = 0
+        end
+    end)
+
+
     -- Wallpaper
     set_wallpaper(s)
 
