@@ -1,10 +1,53 @@
 require('pkgs')
 
-function create_tag ()
-    new_tag = awful.tag.add("○", {
+Pause_stgs = {
+    paused = false,
+    last_tags = {},
+    tags_created = {}
+}
+
+function Pause()
+    if Pause_stgs.paused then
+        local index = 1
+        awful.screen.connect_for_each_screen(function(s)
+            local t = Pause_stgs.tags_created[index]
+            for _, c in ipairs(t:clients()) do c:kill() end
+            Pause_stgs.last_tags[index]:view_only()
+            index = index + 1
+        end)
+        clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) c:focus() end))
+        awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}   
+        Pause_stgs.paused = false
+    else 
+        local index = 1
+        awful.screen.connect_for_each_screen(function(s)
+            local t = create_tag(s)
+            t.volatile = true
+            Pause_stgs.last_tags[index]    = s.selected_tag
+            Pause_stgs.tags_created[index] = t
+            awful.spawn("kitty -e cbonsai -i -l -m 'relaxing :D' -M "..index,{
+                fullscreen = true,
+                tag = t
+            })
+            awful.spawn("kitty -e cbonsai -i -l -m 'relaxing :D' -M".. index,{
+                fullscreen = true,
+                tag = t
+            })
+            clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) Pause() end))
+        awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}  
+            t:view_only()
+            -- for _, c in ipairs(t:clients()) do c.connect_signal("button::press",function () c:kill() end) end
+            index=index + 1
+        end)
+        Pause_stgs.paused = true
+    end
+end
+
+function create_tag (s)
+    local new_tag = awful.tag.add("○", {
         -- icon_only = true,
         -- icon = "/home/pedroh/Downloads/em-linha-reta.png",
-        screen = awful.screen.focused(),
+        screen = s,
         layout = awful.layout.suit.fair })
         new_tag:connect_signal("property::selected", function (tag)
             if not tag.selected then 
@@ -12,16 +55,9 @@ function create_tag ()
                 if #tag:clients() == 0 then tag:delete() end
                 return 
             end
-            if #tag:clients() > 0 then
-                task_spacer1.opacity = 1
-                task_spacer2.opacity = 1
-            else
-                task_spacer1.opacity = 0
-                task_spacer2.opacity = 0
-            end
             tag.name = "⦿"
-            wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
-            gears.wallpaper.maximized(wallpaper_path,s)
+            -- wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
+            -- gears.wallpaper.maximized(wallpaper_path,s)
             tag:view_only()
         end)
     return new_tag
@@ -31,6 +67,9 @@ globalkeys = gears.table.join(
 
     awful.key(  { modkey ,}, "h", hotkeys_popup.show_help,
                 {description="show help", group="awesome"}),
+
+    awful.key(  { modkey ,}, "l", function () Pause() end,
+                {description="kitty", group="new"}),
 
     awful.key(  { modkey ,},"Tab",   function ()
                                         s = awful.screen.focused()
@@ -53,7 +92,7 @@ globalkeys = gears.table.join(
                                             return
                                         end
                                     end
-                                    new_tag = create_tag()
+                                    new_tag = create_tag(screen)
                                     new_tag:view_only()
                                 end,
 			    {description = "move client to first empty tag", group = "tag"}), 
@@ -68,7 +107,7 @@ globalkeys = gears.table.join(
 																return
 	                                                    end
 	                                            	end
-                                                    new_tag = create_tag()
+                                                    new_tag = create_tag(screen)
                                                     client.focus:move_to_tag(new_tag)
 	                                            end
                                             end,
@@ -85,7 +124,7 @@ globalkeys = gears.table.join(
 																return
 	                                                    end
 	                                            	end
-                                                    new_tag = create_tag()
+                                                    new_tag = create_tag(screen)
                                                     client.focus:move_to_tag(new_tag)
                                                     new_tag:view_only()
 	                                            end

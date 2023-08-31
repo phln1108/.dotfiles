@@ -158,8 +158,8 @@ awful.screen.connect_for_each_screen(function(s)
                     task_spacer2.opacity = 0
                 end
                 tag.name = "⦿"
-                wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
-                gears.wallpaper.maximized(wallpaper_path,s,true)
+                -- wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
+                -- gears.wallpaper.maximized(wallpaper_path,s,true)
                 tag:view_only()
             end)
         end
