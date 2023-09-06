@@ -15,8 +15,8 @@ function Pause()
             Pause_stgs.last_tags[index]:view_only()
             index = index + 1
         end)
-        clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) c:focus() end))
-        awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}   
+        -- clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) c:raise() end))
+        -- awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}   
         Pause_stgs.paused = false
     else 
         local index = 1
@@ -33,8 +33,8 @@ function Pause()
                 fullscreen = true,
                 tag = t
             })
-            clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) Pause() end))
-        awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}  
+        --     clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) Pause() end))
+        -- awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}  
             t:view_only()
             -- for _, c in ipairs(t:clients()) do c.connect_signal("button::press",function () c:kill() end) end
             index=index + 1
