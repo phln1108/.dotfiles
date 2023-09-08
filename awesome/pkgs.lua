@@ -42,4 +42,4 @@ awful.layout.layouts = {
 }
 
 
--- gloval widgets 
+-- global widgets 

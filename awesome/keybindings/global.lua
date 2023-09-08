@@ -196,7 +196,7 @@ globalkeys = gears.table.join(
               end,
               {description = "print screen", group = "awesome"}),
               
-    -- Menubar
+   -- Menubar
     awful.key({ modkey ,}, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
