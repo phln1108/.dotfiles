@@ -1,4 +1,5 @@
 require('pkgs')
+require('helpers.functions')
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -8,31 +9,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- baterry widget check if im using the laptop or the pc, 
--- to show or not the widget
-local get_batery = function ()
-    local path = io.popen("echo $HOME"):read("*all")
-
-    if path == "/home/ph\n" or true then
-        return require("widgets.battery-widget"){
-            bg = beautiful.bg_normal,
-            ac_prefix = "+Bat:",
-            battery_prefix = "-Bat:",
-            percent_colors = {
-                {  25, "red"   },
-                {  50, "orange"},
-                { 999, "green" },
-            },
-            listen = true,
-            timeout = 10,
-            widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
-            tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
-        }
-    end
-    return nil
-end
-
-local battery_widget = get_batery()
+--local battery_widget = get_batery()
 
 local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
 
@@ -112,6 +89,7 @@ function spacer (tl,tr,br,bl)
         shape  = function (cr,w,h)
             gears.shape.partially_rounded_rect(cr,w,h,tl,tr,br,bl)
         end,
+        opacity = 1
     }
     -- return wibox.container.background(teste,beautiful.bg_normal)
 end
@@ -121,51 +99,40 @@ awful.screen.connect_for_each_screen(function(s)
 
     local task_spacer1 = spacer(false,false,false,true)
     local task_spacer2 = spacer(false,false,true,false)
+    task_spacer1.opacity = 1
+    task_spacer2.opacity = 1
 
-    task_spacer1.opacity = 0
-    task_spacer2.opacity = 0
+    s.task_spacer1 = task_spacer1
+    s.task_spacer2 = task_spacer2
 
     client.connect_signal("list",function ()
-        local tag = awful.screen.focused().selected_tag
+        local s = awful.screen.focused()
+        local tag = s.selected_tag
         if #tag:clients() > 0 then
-            task_spacer1.opacity = 1
-            task_spacer2.opacity = 1
+            s.task_spacer1.opacity = 1
+            s.task_spacer2.opacity = 1
         else
-            task_spacer1.opacity = 0
-            task_spacer2.opacity = 0
+            s.task_spacer1.opacity = 0
+            s.task_spacer2.opacity = 0
         end
     end)
-
 
     -- Wallpaper
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "⦿", "○", "○"}, s, awful.layout.layouts[1])
-
-    for t = 1,#s.tags do
-        if s.tags[t] then
-            s.tags[t]:connect_signal("property::selected", function (tag)
-                if not tag.selected then
-                    tag.name = "○"
-                    return 
-                end
-                if #tag:clients() > 0 then
-                    task_spacer1.opacity = 1
-                    task_spacer2.opacity = 1
-                else
-                    task_spacer1.opacity = 0
-                    task_spacer2.opacity = 0
-                end
-                tag.name = "⦿"
-                -- wallpaper_path = "wallpapers/wallpaper" .. t .. ".jpg"
-                -- gears.wallpaper.maximized(wallpaper_path,s,true)
-                tag:view_only()
-            end)
-        end
-    end
-
+    new_tag  = Create_tag(s,false)
+    new_tag1 = Create_tag(s,false)
+    new_tag2 = Create_tag(s,false)
     
+    new_tag:view_only()
+    if #new_tag:clients() > 0 then
+        s.task_spacer1.opacity = 1
+        s.task_spacer2.opacity = 1
+    else
+        s.task_spacer1.opacity = 0
+        s.task_spacer2.opacity = 0
+    end
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

@@ -1,4 +1,5 @@
 require('pkgs')
+require('helpers.functions')
 
 Pause_stgs = {
     paused = false,
@@ -15,52 +16,31 @@ function Pause()
             Pause_stgs.last_tags[index]:view_only()
             index = index + 1
         end)
-        -- clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) c:raise() end))
-        -- awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}   
         Pause_stgs.paused = false
-    else 
+    else
         local index = 1
         awful.screen.connect_for_each_screen(function(s)
-            local t = create_tag(s)
+            local t = Create_tag(s,true)
             t.volatile = true
             Pause_stgs.last_tags[index]    = s.selected_tag
             Pause_stgs.tags_created[index] = t
             awful.spawn("kitty -e cbonsai -i -l -m 'relaxing :D' -M "..index,{
                 fullscreen = true,
-                tag = t
+                tag = t,
+                buttons = gears.table.join(awful.button({ },1,function () Pause() end)),
+                keys = gears.table.join(awful.key({ }, "space", function () Pause() end))
             })
             awful.spawn("kitty -e cbonsai -i -l -m 'relaxing :D' -M".. index,{
                 fullscreen = true,
-                tag = t
+                tag = t,
+                buttons = gears.table.join(awful.button({ },1,function () Pause() end)),
+                keys = gears.table.join(awful.key({ }, "space", function () Pause() end))
             })
-        --     clientbuttons = awful.util.table.join(awful.button({ }, 1, function (c) Pause() end))
-        -- awful.rules.rules = {{ rule = { },properties = { buttons = clientbuttons } }}  
             t:view_only()
-            -- for _, c in ipairs(t:clients()) do c.connect_signal("button::press",function () c:kill() end) end
             index=index + 1
         end)
         Pause_stgs.paused = true
     end
-end
-
-function create_tag (s)
-    local new_tag = awful.tag.add("○", {
-        -- icon_only = true,
-        -- icon = "/home/pedroh/Downloads/em-linha-reta.png",
-        screen = s,
-        layout = awful.layout.suit.fair })
-        new_tag:connect_signal("property::selected", function (tag)
-            if not tag.selected then 
-                tag.name = "○"
-                if #tag:clients() == 0 then tag:delete() end
-                return 
-            end
-            tag.name = "⦿"
-            -- wallpaper_path = "wallpapers/wallpaper" .. tag.index .. ".jpg"
-            -- gears.wallpaper.maximized(wallpaper_path,s)
-            tag:view_only()
-        end)
-    return new_tag
 end
 
 globalkeys = gears.table.join(
@@ -69,19 +49,19 @@ globalkeys = gears.table.join(
                 {description="show help", group="awesome"}),
 
     awful.key(  { modkey ,}, "l", function () Pause() end,
-                {description="kitty", group="new"}),
+                {description="show pause animation", group="pause"}),
 
     awful.key(  { modkey ,},"Tab",   function ()
                                         s = awful.screen.focused()
                                         awful.tag.viewnext(s)
                                     end,
-                {description = "view next tag that have something in it", group = "tag"}),
+                {description = "view next tag ", group = "tag"}),
 
     awful.key(  { modkey , "Shift" },"Tab",   function ()
                                                 s = awful.screen.focused()
                                                 awful.tag.viewprev(s)
                                             end,
-                {description = "view previous tag that have something in it", group = "tag"}),
+                {description = "view previous tag ", group = "tag"}),
 
 	awful.key({ modkey ,},"z",	function()
                                     local screen = awful.screen.focused()
@@ -92,10 +72,10 @@ globalkeys = gears.table.join(
                                             return
                                         end
                                     end
-                                    new_tag = create_tag(screen)
+                                    new_tag = Create_tag(screen,true)
                                     new_tag:view_only()
                                 end,
-			    {description = "move client to first empty tag", group = "tag"}), 
+			    {description = "move client to first empty tag", group = "tag"}),
 
 	awful.key(  { modkey , "Shift" },"z",   function()
 												if client.focus then
@@ -107,7 +87,7 @@ globalkeys = gears.table.join(
 																return
 	                                                    end
 	                                            	end
-                                                    new_tag = create_tag(screen)
+                                                    new_tag = Create_tag(screen,true)
                                                     client.focus:move_to_tag(new_tag)
 	                                            end
                                             end,
@@ -124,15 +104,15 @@ globalkeys = gears.table.join(
 																return
 	                                                    end
 	                                            	end
-                                                    new_tag = create_tag(screen)
+                                                    new_tag = Create_tag(screen,true)
                                                     client.focus:move_to_tag(new_tag)
                                                     new_tag:view_only()
 	                                            end
                                             end,
 			    {description = "move client to first empty tag and go with it ", group = "tag"}),
 --!!! may change
-    awful.key(  { modkey ,},"Escape",    awful.tag.history.restore,
-                {description = "go back", group = "tag"}),
+    -- awful.key(  { modkey ,},"Escape",    awful.tag.history.restore,
+    --             {description = "go back", group = "tag"}),
 
     awful.key(  { modkey ,},"Right", function () awful.client.focus.byidx( 1)    end,
                 {description = "focus next client by index", group = "client"}),
@@ -166,6 +146,7 @@ globalkeys = gears.table.join(
                                                             end 
                                                         end,
                 {description = "move client to next tag and focus it", group = "client"}),
+
     awful.key(  { modkey , "Shift", "Control" },"Left",function () 
                                                             if client.focus then
                                                                 local screen = awful.screen.focused()
@@ -180,9 +161,6 @@ globalkeys = gears.table.join(
                                                         end,
                 {description = "move client to previous tag and focus it", group = "client"}),
 
-
-
-
 --!!! know the purpose
     awful.key(  { modkey ,},"u", awful.client.urgent.jumpto,
                 {description = "jump to urgent client", group = "client"}),
@@ -192,8 +170,8 @@ globalkeys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey , "Control" },"r",   awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey , "Shift" },"q", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+    -- awful.key({ modkey , "Shift" },"q", awesome.quit,
+    --           {description = "quit awesome", group = "awesome"}),
 
 --!!!
     awful.key({ modkey, "Control" }, "n",
