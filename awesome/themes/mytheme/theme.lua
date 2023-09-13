@@ -1,9 +1,10 @@
 -------------------------------
 --  "mytheme" awesome theme  --
---    By Adrian C. (anrxc)   --
+--    By Pedro H. (anrxc)   --
 -------------------------------
 
-local themes_path = require("gears.filesystem").get_themes_dir()
+local themes_path = "~/.dotfiles/awesome/themes/"
+-- local themes_path = require("gears.filesystem").get_themes_dir()
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
@@ -12,20 +13,21 @@ theme.wallpaper     = themes_path .. "mytheme/background.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font          = "blasphemous 12"
+theme.font          = "Pixellari 13"
+-- theme.font          = "Small Pixel7 13"
 
 -- {{{ Colors
 theme.fg_normal     = "#DCDCCC"
 theme.fg_focus      = "#F0DFAF"
 theme.fg_urgent     = "#CC9393"
-theme.bg_normal     = "#3F3F3F"
-theme.bg_focus      = "#1E2320"
+theme.bg_normal     = "#272D40" --"#3F3F3F"
+theme.bg_focus      = "#363B53" --"#1E2320"
 theme.bg_urgent     = "#3F3F3F"
 theme.bg_systray    = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = "#3F3F3F"
 theme.border_focus  = "#6F6F6F"

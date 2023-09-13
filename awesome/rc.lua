@@ -5,7 +5,7 @@ require('error-handling')
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_configuration_dir()..'themes/mytheme/theme.lua')
+beautiful.init("~/.dotfiles/awesome/themes/mytheme/theme.lua")
 -- }}}
 require('menu')
 require('wibar')

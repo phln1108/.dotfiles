@@ -91,7 +91,6 @@ function spacer (tl,tr,br,bl)
         end,
         opacity = 1
     }
-    -- return wibox.container.background(teste,beautiful.bg_normal)
 end
 
 
