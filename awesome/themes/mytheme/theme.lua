@@ -17,11 +17,11 @@ theme.font          = "Pixellari 13"
 -- theme.font          = "Small Pixel7 13"
 
 -- {{{ Colors
-theme.fg_normal     = "#DCDCCC"
-theme.fg_focus      = "#F0DFAF"
+theme.fg_normal     = "#838EB3"
+theme.fg_focus      = "#FFFEE0"
 theme.fg_urgent     = "#CC9393"
-theme.bg_normal     = "#272D40" --"#3F3F3F"
-theme.bg_focus      = "#363B53" --"#1E2320"
+theme.bg_normal     = "#101216" --"#3F3F3F"
+theme.bg_focus      = "#2F3041" --"#1E2320"
 theme.bg_urgent     = "#3F3F3F"
 theme.bg_systray    = theme.bg_normal
 -- }}}

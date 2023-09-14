@@ -120,9 +120,9 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    new_tag  = Create_tag(s,false)
-    new_tag1 = Create_tag(s,false)
-    new_tag2 = Create_tag(s,false)
+    local new_tag  = Create_tag(s,false)
+    local new_tag1 = Create_tag(s,false)
+    local new_tag2 = Create_tag(s,false)
     
     new_tag:view_only()
     if #new_tag:clients() > 0 then

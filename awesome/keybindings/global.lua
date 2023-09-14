@@ -175,24 +175,25 @@ globalkeys = gears.table.join(
 
 --!!!
     awful.key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
+            function ()
+                local c = awful.client.restore()
+                -- Focus restored client
+                if c then
                     c:emit_signal(
-                        "request::activate", "key.unminimize", {raise = true}
-                    )
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+                    "request::activate", "key.unminimize", {raise = true}
+                )
+                end
+            end,
+            {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey ,},            "r",     function () awful.spawn("rofi -show drun") end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey ,},  "r",    function () 
+                awful.spawn("rofi -config ~/.config/rofi/rofi.rasi -show drun") 
+            end,
+            {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey ,}, "x",
-              function ()
-                  awful.spawn("flameshot gui")
+    awful.key({ modkey ,},  "x",    function ()
+                awful.spawn("flameshot gui")
               end,
               {description = "print screen", group = "awesome"}),
               

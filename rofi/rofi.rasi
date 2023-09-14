@@ -1,0 +1,125 @@
+// configuration {
+// 	font: "Pixellari 16";
+//   show-icons: true;
+// 	terminal: "kitty";
+//   timeout {
+//       action: "kb-cancel";
+//       delay:  0;
+//   }
+//   filebrowser {
+//       directories-first: true;
+//       sorting-method:    "name";
+//   }
+// }
+
+// @theme "/dev/null"
+
+configuration {
+	show-icons: true;
+	location: 0;
+	font: "Pixellari 16";
+	display-drun: "";
+}
+
+* {
+  cream: #FFFEE0;
+  coolGray: #838EB3;
+  raisinBlack: #2F3041;
+  night: #101216;
+	background-color: @night;
+  border-color: @night;
+  text-color: @coolGray;
+  border-radius: 10px;
+}
+
+window { 
+	width: 40%;
+	background-color: @raisinBlack;
+	orientation: vertical;
+	border-color: @night;
+  border-radius: 10px;
+}
+
+mainbox {
+//  children: [inputbar, listview];
+  // border-color: @night;
+}
+
+
+// ELEMENT
+// -----------------------------------
+  
+element {
+	padding: 4 12;
+	text-color: #EFE7DD;
+  orientation: horizontal;
+}
+
+element selected normal {
+  background-color: @raisinBlack;
+  text-color: @cream;
+}
+
+element normal normal, element alternate normal {
+  background-color: @night;
+  text-color: @coolGray;
+}
+
+element-icon {
+	size: 32 px;
+	background-color: inherit;
+	padding: 0 2 0 0;
+	alignment: vertical;
+}
+
+listview {
+	columns: 1;
+	lines: 6;
+	padding: 8 0;
+	fixed-height: true;
+	fixed-columns: true;
+	fixed-lines: true;
+	border: 0 10 0 10;
+  border-color: inherit;
+  scrollbar: false;
+}
+
+// INPUT BAR 
+//------------------------------------------------
+
+entry {
+	text-color: #EFE7DD;
+	padding: 10 10 0 0;
+	margin: 0 -2 0 0;
+  placeholder: " (0_0)";
+  placeholder-color: @coolGray;
+}
+
+num-filtered-rows, num-rows, textbox-num-sep {
+    text-color: @coolGray;
+}
+
+inputbar {
+	// background-image: url("~/.config/rofi/rofi.png", width);
+	padding: 0 0 0 0;
+	margin: 10 0 0 0;
+} 
+
+prompt {
+	text-color: #aaffaa;
+	padding: 10 6 0 10;
+	margin: 0 -2 0 0;
+  enabled: false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
