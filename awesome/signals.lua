@@ -56,34 +56,39 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-
 -- Manage titlebar for clients
-function toggle_titlebar(c)
+local function toggle_titlebar(c)
     if c.floating then
         awful.titlebar.show(c)
+        c.border_width = beautiful.border_width
     else
         awful.titlebar.hide(c)
+        c.border_width = "0"
     end
 end
-client.connect_signal("property::floating", toggle_titlebar)
-
-
 
 -- Manage bars for fullscreen clients
-function toggle_bars(c)
+local function toggle_bars(c)
     if c.fullscreen then
         awful.titlebar.hide(c)
+        c.border_width = "0"
         c.screen.mywibox.visible = false
     else
         if c.floating then
             awful.titlebar.show(c)
+            c.border_width = beautiful.border_width
+        else
+            c.border_width = "0"
+            awful.titlebar.hide(c)
         end
-
         c.screen.mywibox.visible = true
     end
 end
+
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+client.connect_signal("property::floating", toggle_titlebar)
 
 client.connect_signal("manage", toggle_bars)
 client.connect_signal("focus", toggle_bars)

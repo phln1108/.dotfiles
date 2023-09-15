@@ -36,8 +36,8 @@ window {
 	width: 40%;
 	background-color: @raisinBlack;
 	orientation: vertical;
-	border-color: @night;
-  border-radius: 10px;
+	border-color: @raisinBlack;
+  	border-radius: 10px;
 }
 
 mainbox {
