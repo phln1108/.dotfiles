@@ -1,0 +1,109 @@
+configuration {
+	show-icons: true;
+	location: 0;
+	font: "Pixellari 16";
+	display-drun: "";
+}
+
+//   cream: #FFFEE0;
+//   coolGray: #838EB3;
+//   raisinBlack: #2F3041;
+//   night: #101216;
+
+* {
+	beige: #F6FBE8;
+	cambridgeBlue: #90A8A0;
+	darkGreen: #19332F;
+	blackout: #000E13;
+	background-color: @blackout;
+	border-color: @blackout;
+	text-color: @cambridgeBlue;
+	border-radius: 10px;
+}
+
+window { 
+	width: 40%;
+	background-color: @darkGreen;
+	orientation: vertical;
+	border-color: @darkGreen;
+  	border-radius: 10px;
+}
+
+
+// ELEMENT
+// -----------------------------------
+  
+element {
+	padding: 4 12;
+	text-color: #EFE7DD;
+  orientation: horizontal;
+}
+
+element selected normal {
+  background-color: @darkGreen;
+  text-color: @beige;
+}
+
+element normal normal, element alternate normal {
+  background-color: @blackout;
+  text-color: @cambridgeBlue;
+}
+
+element-icon {
+	size: 32 px;
+	background-color: inherit;
+	padding: 0 2 0 0;
+	alignment: vertical;
+}
+
+listview {
+	columns: 1;
+	lines: 6;
+	padding: 8 0;
+	fixed-height: true;
+	fixed-columns: true;
+	fixed-lines: true;
+	border: 0 10 0 10;
+  border-color: inherit;
+  scrollbar: false;
+}
+
+// INPUT BAR 
+//------------------------------------------------
+
+entry {
+	text-color: #EFE7DD;
+	padding: 10 10 0 0;
+	margin: 0 -2 0 0;
+  placeholder: " (0_0)";
+  placeholder-color: @cambridgeBlue;
+}
+
+num-filtered-rows, num-rows, textbox-num-sep {
+    text-color: @cambridgeBlue;
+}
+
+inputbar {
+	// background-image: url("~/.config/rofi/rofi.png", width);
+	padding: 0 0 0 0;
+	margin: 10 0 0 0;
+} 
+
+prompt {
+	text-color: @beige;
+	padding: 10 6 0 10;
+	margin: 0 -2 0 0;
+  enabled: false;
+}
+
+
+
+
+
+
+
+
+
+
+
+

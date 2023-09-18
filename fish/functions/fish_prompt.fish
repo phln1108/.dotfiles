@@ -39,9 +39,12 @@ function fish_prompt
         end
     end
 
-	set -l peguin " " 🐧 " "
+	# set -l emoji " " 🐧 " "
+    # set -l emoji " " 🦆 " "
+    # set -l emoji " " 🐼 " "
+    set -l emoji " " 🐳 " "
     # Shorten pwd if prompt is too long
     set -l pwd (prompt_pwd)
 
-    echo -n -s $peguin $prompt_host $cwd (set_color 838eb3) $pwd $normal $prompt_status $delim
+    echo -n -s $emoji $prompt_host $cwd (set_color 838eb3) $pwd $normal $prompt_status $delim
 end

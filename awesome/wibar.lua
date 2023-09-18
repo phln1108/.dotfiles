@@ -2,12 +2,10 @@ require('pkgs')
 require('helpers.functions')
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
-local dpi = require("beautiful.xresources").apply_dpi
+local mytextclock = wibox.widget.textclock()
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+local mykeyboardlayout = awful.widget.keyboardlayout()
 
 --local battery_widget = get_batery()
 
@@ -76,12 +74,11 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-local teste = wibox.widget{
-    text   = '  ',
-    widget = wibox.widget.textbox
-}
-
-function spacer (tl,tr,br,bl)
+function Spacer (tl,tr,br,bl)
+    local teste = wibox.widget{
+        text   = '  ',
+        widget = wibox.widget.textbox
+    }
     return wibox.widget{
         teste,
         widget = wibox.container.background,
@@ -94,15 +91,12 @@ function spacer (tl,tr,br,bl)
 end
 
 
-awful.screen.connect_for_each_screen(function(s)
+function Create_wibar(s,recreate)
 
-    local task_spacer1 = spacer(false,false,false,true)
-    local task_spacer2 = spacer(false,false,true,false)
-    task_spacer1.opacity = 1
-    task_spacer2.opacity = 1
-
-    s.task_spacer1 = task_spacer1
-    s.task_spacer2 = task_spacer2
+    s.task_spacer1 = Spacer(false,false,false,true)
+    s.task_spacer2 = Spacer(false,false,true,false)
+    s.task_spacer1.opacity = 1
+    s.task_spacer2.opacity = 1
 
     client.connect_signal("list",function ()
         local s = awful.screen.focused()
@@ -120,12 +114,15 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    local new_tag  = Create_tag(s,false)
-    local new_tag1 = Create_tag(s,false)
-    local new_tag2 = Create_tag(s,false)
-    
-    new_tag:view_only()
-    if #new_tag:clients() > 0 then
+    if #s.tags == 0 then
+        local new_tag  = Create_tag(s,false)
+        local new_tag1 = Create_tag(s,false)
+        local new_tag2 = Create_tag(s,false)
+        new_tag:view_only()
+    end
+
+    local t = s.selected_tag
+    if #t:clients() > 0 then
         s.task_spacer1.opacity = 1
         s.task_spacer2.opacity = 1
     else
@@ -135,6 +132,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
+    
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -192,33 +190,32 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         expand = "none",
+
         {
-            spacer(false,false,false,false),
+            Spacer(false,false,false,false),
             layout = wibox.layout.fixed.horizontal,
             {
                 widget = wibox.container.background,
                 bg     = beautiful.bg_normal,
                 s.mytaglist,
             },
-            spacer(false,false,true,false)
+            Spacer(false,false,true,false)
         },
+
         {
             layout = wibox.layout.fixed.horizontal,
-            task_spacer1,
+            s.task_spacer1,
             {
                 widget = wibox.container.background,
                 bg     = beautiful.bg_normal,
                 s.mytasklist,
             },
-            task_spacer2,
-
-            
+            s.task_spacer2,
         },
-        -- wibox.container.place
         
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spacer(false,false,false,true),
+            Spacer(false,false,false,true),
                   
             -- wibox.container.background(battery_widget,beautiful.bg_normal),
             wibox.container.background(brightness_widget{
@@ -236,8 +233,20 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.container.background(wibox.widget.systray(),beautiful.bg_normal),
             wibox.container.background(mytextclock,beautiful.bg_normal),
             wibox.container.background(logout_menu_widget(),beautiful.bg_normal),
-            -- spacer(false,false,false,false),
         },
     }
-end)
+end
+
+function Build_panel()
+    awful.screen.connect_for_each_screen(function (s)
+        local recreate = false
+        -- destroy old panel
+        if s.mywibox then
+            s.mywibox:remove() 
+            recreate = true
+        end
+        Create_wibar(s,recreate)
+    end)
+end
+
 

@@ -1,6 +1,6 @@
 require('pkgs')
 require('helpers.functions')
-
+require('change-theme')
 Pause_stgs = {
     paused = false,
     last_tags = {},
@@ -188,7 +188,7 @@ globalkeys = gears.table.join(
 
     -- Prompt
     awful.key({ modkey ,},  "r",    function () 
-                awful.spawn("rofi -config ~/.config/rofi/rofi.rasi -show drun") 
+                awful.spawn("rofi -config ".. Themes.theme[Themes.actual].rofi_config .." -show drun") 
             end,
             {description = "run prompt", group = "launcher"}),
 
@@ -199,5 +199,9 @@ globalkeys = gears.table.join(
               
    -- Menubar
     awful.key({ modkey ,}, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    awful.key({ modkey ,}, "j", Change_theme,
+    {description="theme colors change", group="awesome"}
+)
 )

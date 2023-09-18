@@ -9,6 +9,7 @@ beautiful.init("~/.dotfiles/awesome/themes/mytheme/theme.lua")
 -- }}}
 require('menu')
 require('wibar')
+Build_panel()
 require('keybindings')
 require('rules')
 require('signals')

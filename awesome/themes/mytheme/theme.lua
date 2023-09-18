@@ -19,24 +19,24 @@ theme.font          = "Pixellari 13"
 -- {{{ Colors
 theme.fg_normal     = "#838EB3"
 theme.fg_focus      = "#FFFEE0"
-theme.fg_urgent     = "#CC9393"
+theme.fg_urgent     = "#838EB3"
 theme.bg_normal     = "#101216" --"#3F3F3F"
 theme.bg_focus      = "#2F3041" --"#1E2320"
-theme.bg_urgent     = "#3F3F3F"
+theme.bg_urgent     = "#838EB3"
 theme.bg_systray    = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#6F6F6F"
-theme.border_marked = "#CC9393"
+theme.border_normal = "#101216"
+theme.border_focus  = "#838EB3"
+theme.border_marked = "#838EB3"
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#3F3F3F"
-theme.titlebar_bg_normal = "#3F3F3F"
+theme.titlebar_bg_focus  = "#838EB3"
+theme.titlebar_bg_normal = "#101216"
 -- }}}
 
 -- There are other variable sets
