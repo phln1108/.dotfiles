@@ -2,14 +2,12 @@ require('pkgs')
 
 function Change_theme()
     -- change theme settings
-    local t = Themes.theme[1]
-    if Themes.actual == 1 then
-        t = Themes.theme[2]
-        Themes.actual = 2
-    else
-        t = Themes.theme[1]
+    Themes.actual  = Themes.actual+1
+    if Themes.actual > #Themes.theme then
         Themes.actual = 1
     end
+    local t = Themes.theme[Themes.actual]
+    
     beautiful.fg_normal     = t.fg_normal
     beautiful.fg_focus      = t.fg_focus
     beautiful.fg_urgent     = t.bg_urgent

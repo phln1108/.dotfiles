@@ -5,24 +5,30 @@ configuration {
 	display-drun: "";
 }
 
+//   cream: #FFFEE0;
+//   coolGray: #838EB3;
+//   raisinBlack: #2F3041;
+//   night: #101216;
+
 * {
-  cream: #FFFEE0;
-  coolGray: #838EB3;
-  raisinBlack: #2F3041;
-  night: #101216;
-	background-color: @night;
-  border-color: @night;
-  text-color: @coolGray;
-  border-radius: 10px;
+	beige: #44ABD4;
+	cambridgeBlue: #CFE0E1;
+	darkGreen: #ADD4D0;
+	blackout: #8DA8B1;
+	background-color: @blackout;
+	border-color: @blackout;
+	text-color: @cambridgeBlue;
+	border-radius: 10px;
 }
 
 window { 
 	width: 40%;
-	background-color: @raisinBlack;
+	background-color: @darkGreen;
 	orientation: vertical;
-	border-color: @raisinBlack;
+	border-color: @darkGreen;
   	border-radius: 10px;
 }
+
 
 // ELEMENT
 // -----------------------------------
@@ -34,13 +40,13 @@ element {
 }
 
 element selected normal {
-  background-color: @raisinBlack;
-  text-color: @cream;
+  background-color: @darkGreen;
+  text-color: @beige;
 }
 
 element normal normal, element alternate normal {
-  background-color: @night;
-  text-color: @coolGray;
+  background-color: @blackout;
+  text-color: @cambridgeBlue;
 }
 
 element-icon {
@@ -70,11 +76,11 @@ entry {
 	padding: 10 10 0 0;
 	margin: 0 -2 0 0;
   placeholder: " (0_0)";
-  placeholder-color: @coolGray;
+  placeholder-color: @cambridgeBlue;
 }
 
 num-filtered-rows, num-rows, textbox-num-sep {
-    text-color: @coolGray;
+    text-color: @cambridgeBlue;
 }
 
 inputbar {
@@ -84,7 +90,7 @@ inputbar {
 } 
 
 prompt {
-	text-color: #aaffaa;
+	text-color: @beige;
 	padding: 10 6 0 10;
 	margin: 0 -2 0 0;
   enabled: false;

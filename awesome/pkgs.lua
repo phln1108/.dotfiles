@@ -48,7 +48,7 @@ awful.layout.layouts = {
 Themes = {
     actual = 1,
     theme = {
-        {
+        {--blue wallpaper
             fg_normal     = "#838EB3",
             fg_focus      = "#FFFEE0",
             fg_urgent     = "#838EB3",
@@ -65,11 +65,11 @@ Themes = {
             titlebar_bg_focus  = "#838EB3",
             titlebar_bg_normal = "#101216",
 
-            wallpaper     = ".config/awesome/themes/mytheme/background.jpg",
+            wallpaper     = ".config/awesome/themes/mytheme/wallpapers/background.jpg",
 
             rofi_config   = "~/.config/rofi/rofi.rasi",
         },
-        {
+        {--greenish wallpaper
             fg_normal     = "#90A8A0",
             fg_focus      = "#F6FBE8",
             fg_urgent     = "#90A8A0",
@@ -86,11 +86,52 @@ Themes = {
             titlebar_bg_focus  = "#90A8A0",
             titlebar_bg_normal = "#000E13",
 
-            wallpaper     = ".config/awesome/themes/mytheme/background1.jpg",
+            wallpaper     = ".config/awesome/themes/mytheme/wallpapers/background1.jpg",
           
             
             rofi_config   = "~/.config/rofi/rofi1.rasi",
         },
-        
+        {--white wallpaper
+            fg_normal     = "#ECB8C5",
+            fg_focus      = "#EDEBEE",
+            fg_urgent     = "#ECB8C5",
+
+            bg_normal     = "#3F475B",
+            bg_focus      = "#5E6181",
+            bg_urgent     = "#ECB8C5",
+            bg_systray    = bg_normal,
+
+            border_normal = "#3F475B",
+            border_focus  = "#ECB8C5",
+            border_marked = "#ECB8C5",
+
+            titlebar_bg_focus  = "#ECB8C5",
+            titlebar_bg_normal = "#3F475B",
+
+            wallpaper     = ".config/awesome/themes/mytheme/wallpapers/background2.png",
+
+            rofi_config   = "~/.config/rofi/rofi2.rasi",
+        },
+        {--sky wallpaper
+        fg_normal     = "#CFE0E1",
+        fg_focus      = "#44ABD4",
+        fg_urgent     = "#CFE0E1",
+
+        bg_normal     = "#8DA8B1",
+        bg_focus      = "#ADD4D0",
+        bg_urgent     = "#CFE0E1",
+        bg_systray    = bg_normal,
+
+        border_normal = "#8DA8B1",
+        border_focus  = "#CFE0E1",
+        border_marked = "#CFE0E1",
+
+        titlebar_bg_focus  = "#CFE0E1",
+        titlebar_bg_normal = "#8DA8B1",
+
+        wallpaper     = ".config/awesome/themes/mytheme/wallpapers/background3.jpg",
+
+        rofi_config   = "~/.config/rofi/rofi3.rasi",
+        },
     }
 }
