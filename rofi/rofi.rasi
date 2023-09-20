@@ -6,14 +6,14 @@ configuration {
 }
 
 * {
-  cream: #FFFEE0;
-  coolGray: #838EB3;
-  raisinBlack: #2F3041;
-  night: #101216;
+	cream: #FFFEE0;
+	coolGray: #838EB3;
+	raisinBlack: #2F3041;
+	night: #101216;
 	background-color: @night;
-  border-color: @night;
-  text-color: @coolGray;
-  border-radius: 10px;
+	border-color: @night;
+	text-color: @coolGray;
+	border-radius: 10px;
 }
 
 window { 
@@ -24,23 +24,29 @@ window {
   	border-radius: 10px;
 }
 
+
+
+mainbox{
+	children: [inputbar,listview];
+}
+
 // ELEMENT
 // -----------------------------------
   
 element {
 	padding: 4 12;
-	text-color: #EFE7DD;
-  orientation: horizontal;
+	// text-color: #ffffff;
+	orientation: horizontal;
 }
 
 element selected normal {
-  background-color: @raisinBlack;
-  text-color: @cream;
+	background-color: @raisinBlack;
+	text-color: @cream;
 }
 
 element normal normal, element alternate normal {
-  background-color: @night;
-  text-color: @coolGray;
+	background-color: @night;
+	text-color: @coolGray;
 }
 
 element-icon {
@@ -58,36 +64,40 @@ listview {
 	fixed-columns: true;
 	fixed-lines: true;
 	border: 0 10 0 10;
-  border-color: inherit;
-  scrollbar: false;
+	border-color: inherit;
+	scrollbar: false;
 }
 
 // INPUT BAR 
 //------------------------------------------------
 
 entry {
+	// enabled: false;
 	text-color: #EFE7DD;
 	padding: 10 10 0 0;
 	margin: 0 -2 0 0;
-  placeholder: " (0_0)";
-  placeholder-color: @coolGray;
+	placeholder: " :D";
+	placeholder-color: @coolGray;
 }
 
 num-filtered-rows, num-rows, textbox-num-sep {
     text-color: @coolGray;
+	enabled: false;	
 }
+
 
 inputbar {
 	// background-image: url("~/.config/rofi/rofi.png", width);
 	padding: 0 0 0 0;
 	margin: 10 0 0 0;
+	text-color: @night;
 } 
 
 prompt {
 	text-color: #aaffaa;
 	padding: 10 6 0 10;
 	margin: 0 -2 0 0;
-  enabled: false;
+  	// enabled: false;
 }
 
 

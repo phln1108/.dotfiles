@@ -258,8 +258,8 @@ function fish_git_prompt --description "Prompt function for Git"
 
     # If we don't print these, there is no need to compute them. Note: For now, staged and dirty are coupled.
     if not set -q dirty[1]
-        contains -- "$__fish_git_prompt_showdirtystate" yes true 1
-        and set dirty true
+        contains -- "$__fish_git_prompt_showdirtystate" true true 1
+        and set dirty false
     end
     contains dirtystate $__fish_git_prompt_status_order || contains stagedstate $__fish_git_prompt_status_order
     or set dirty false
@@ -393,7 +393,7 @@ function fish_git_prompt --description "Prompt function for Git"
     end
     set -l format $argv[1]
     if test -z "$format"
-        set format " (%s)"
+        set format "%s"
     end
 
     printf "%s$format%s" "$___fish_git_prompt_color_prefix" "$___fish_git_prompt_color_prefix_done$c$b$f$r$p$informative_status$___fish_git_prompt_color_suffix" "$___fish_git_prompt_color_suffix_done"
