@@ -81,6 +81,7 @@ entry {
 
 num-filtered-rows, num-rows, textbox-num-sep {
     text-color: @cambridgeBlue;
+	enabled: false;	
 }
 
 inputbar {

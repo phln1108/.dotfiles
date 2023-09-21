@@ -2,7 +2,7 @@ configuration {
 	show-icons: true;
 	location: 0;
 	font: "Pixellari 16";
-	display-drun: "";
+	display-drun: "»";
 }
 
 //   cream: #FFFEE0;
@@ -36,17 +36,17 @@ window {
 element {
 	padding: 4 12;
 	text-color: #EFE7DD;
-  orientation: horizontal;
+	orientation: horizontal;
 }
 
 element selected normal {
-  background-color: @ultraViolet;
-  text-color: @flashWhite;
+	background-color: @ultraViolet;
+	text-color: @flashWhite;
 }
 
 element normal normal, element alternate normal {
-  background-color: @charcoal;
-  text-color: @orchidPink;
+	background-color: @charcoal;
+	text-color: @orchidPink;
 }
 
 element-icon {
@@ -64,8 +64,8 @@ listview {
 	fixed-columns: true;
 	fixed-lines: true;
 	border: 0 10 0 10;
-  border-color: inherit;
-  scrollbar: false;
+	border-color: inherit;
+	scrollbar: false;
 }
 
 // INPUT BAR 
@@ -75,25 +75,29 @@ entry {
 	text-color: #EFE7DD;
 	padding: 10 10 0 0;
 	margin: 0 -2 0 0;
-  placeholder: " (0_0)";
-  placeholder-color: @orchidPink;
+	placeholder: "";
+	placeholder-color: @orchidPink;
 }
 
 num-filtered-rows, num-rows, textbox-num-sep {
     text-color: @orchidPink;
+	enabled: false;
 }
 
 inputbar {
-	// background-image: url("~/.config/rofi/rofi.png", width);
+	// background-image: url("~/.config/rofi/sk.gif",both);
+	// padding: 380 0 0;
 	padding: 0 0 0 0;
 	margin: 10 0 0 0;
+	text-color: @charcoal;
 } 
 
 prompt {
-	text-color: @flashWhite;
-	padding: 10 6 0 10;
-	margin: 0 -2 0 0;
-  enabled: false;
+	text-color: @orchidPink;
+	padding: 5 0 0 10;
+	margin: 0 0 0 0;
+	font: "Pixellari 24";
+  	// enabled: false;
 }
 
 

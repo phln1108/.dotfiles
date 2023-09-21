@@ -9,7 +9,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper     = themes_path .. "mytheme/wallpapers/background.jpg"
+theme.wallpaper     = themes_path .. "mytheme/wallpapers/sakura.gif"
 -- }}}
 
 -- {{{ Styles
@@ -17,26 +17,27 @@ theme.font          = "Pixellari 13"
 -- theme.font          = "Small Pixel7 13"
 
 -- {{{ Colors
-theme.fg_normal     = "#838EB3"
-theme.fg_focus      = "#FFFEE0"
-theme.fg_urgent     = "#838EB3"
-theme.bg_normal     = "#101216" --"#3F3F3F"
-theme.bg_focus      = "#2F3041" --"#1E2320"
-theme.bg_urgent     = "#838EB3"
+theme.fg_normal     = "#ECB8C5"
+theme.fg_focus      = "#EDEBEE"
+theme.fg_urgent     = "#ECB8C5"
+
+theme.bg_normal     = "#3F475B" --"#3F3F3F"
+theme.bg_focus      = "#5E6181" --"#1E2320"
+theme.bg_urgent     = "#ECB8C5"
 theme.bg_systray    = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
-theme.border_normal = "#101216"
-theme.border_focus  = "#838EB3"
-theme.border_marked = "#838EB3"
+theme.border_normal = "#3F475B"
+theme.border_focus  = "#ECB8C5"
+theme.border_marked = "#ECB8C5"
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#838EB3"
-theme.titlebar_bg_normal = "#101216"
+theme.titlebar_bg_focus  = "#ECB8C5"
+theme.titlebar_bg_normal = "#3F475B"
 -- }}}
 
 -- There are other variable sets
