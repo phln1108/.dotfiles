@@ -27,6 +27,10 @@ int main(int argc, char *argv[]) {
     printf("opening dir\n");
 
     DIR *dir = opendir(image_folder);
+    if (!dir) {
+        perror("opendir");
+        return 1;
+    }
 
     printf("vinicius lixo\n");
 
@@ -55,7 +59,7 @@ int main(int argc, char *argv[]) {
                 imlib_context_set_drawable(pixmap);
                 printf("certeza2\n");
                 
-                // imlib_render_image_on_drawable(0, 0);
+                imlib_render_image_on_drawable(0, 0);
 
                 printf("setting background\n");
 
