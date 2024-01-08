@@ -4,7 +4,7 @@ res=$(echo "lock|suspend|logout|restart|shutdown" | rofi -sep '|' -config $1 -dm
 echo $1
 case $res in
     lock)
-        i3lock -i ~/.dotfiles/i3/lock.png
+        i3lock -i ~/.dotfiles/i3/lock.png -u
         ;;
     logout) 
         i3-msg exit

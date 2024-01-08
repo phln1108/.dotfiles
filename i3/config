@@ -161,7 +161,7 @@ mode "resize" {
 
 bindsym $sup+d mode "resize"
 bindsym $sup+r exec rofi -config $rofi -show drun
-bindsym $sup+l exec i3lock -i ~/.dotfiles/i3/lock.png
+bindsym $sup+l exec i3lock -i ~/.dotfiles/i3/lock.png -u
 bindsym $sup+x exec flameshot gui
 
 #managing workspaces and containers
