@@ -42,7 +42,7 @@ floating_modifier $sup
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
-tiling_drag modifier titlebar
+# tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $sup+Return exec kitty
@@ -161,7 +161,7 @@ mode "resize" {
 
 bindsym $sup+d mode "resize"
 bindsym $sup+r exec rofi -config $rofi -show drun
-bindsym $sup+l exec i3lock -i ~/.dotfiles/i3/lock.png -u
+bindsym $sup+l exec i3lock -i ~/.dotfiles/i3/lock.png -u -t
 bindsym $sup+x exec flameshot gui
 
 #managing workspaces and containers
@@ -170,8 +170,13 @@ bindsym $sup+Shift+z exec --no-startup-id "$functions_path/i3-new-workspace.sh -
 bindsym $sup+Control+z exec --no-startup-id "$functions_path/i3-new-workspace.sh -c"
 
 #change brightness
-bindsym $sup+period exec --no-startup-id brightnessctl set +5%
-bindsym $sup+comma exec --no-startup-id brightnessctl set 5%-
+bindsym $sup+comma exec --no-startup-id brightnessctl set +5%
+bindsym $sup+Shift+comma exec --no-startup-id brightnessctl set 5%-
+
+#cahnge volume
+bindsym $sup+period exec "pactl set-sink-volume 0 +5%"
+bindsym $sup+Shift+period exec "pactl set-sink-volume 0 -5%"
+bindsym $sup+Control+period exec "pactl set-sink-mute 0 toggle"
 
 #shtudown/restart/logout rofi menu
 bindsym $sup+Shift+q exec "$functions_path/power-menu.sh ~/.dotfiles/rofi/rofipm.rasi"
@@ -193,8 +198,8 @@ bar {
 for_window [class="^.*"] border pixel 1
 default_border pixel 0
 
-gaps inner 2
-#smart_gaps on
+# gaps inner 2
+# smart_gaps on
 #smart_borders on
 
 #wallpaper
@@ -205,3 +210,5 @@ exec_always "setxkbmap -layout us,br -variant intl, -option grp:alt_shift_toggle
 
 #picom
 exec_always picom
+
+exec_always $functions_path/start-config.sh

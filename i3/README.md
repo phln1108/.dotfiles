@@ -9,6 +9,7 @@ For installing i3 config, you have to follow the "Mine configuration files" guid
 ### Other things
 
 * brightnessctl (change brightness)
+* pactl (Control PulseAudio)
 
 ### addons functions
 

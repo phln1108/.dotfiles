@@ -4,13 +4,13 @@ res=$(echo "lock|suspend|logout|restart|shutdown" | rofi -sep '|' -config $1 -dm
 echo $1
 case $res in
     lock)
-        i3lock -i ~/.dotfiles/i3/lock.png -u
+        i3lock -i ~/.dotfiles/i3/lock.png -u -t
         ;;
     logout) 
         i3-msg exit
         ;;
     suspend) 
-        i3lock -i ~/.dotfiles/i3/lock.png && systemctl suspend
+        i3lock -i ~/.dotfiles/i3/lock.png -u -t && systemctl suspend
         ;;
     shutdown) 
         systemctl poweroff -i
