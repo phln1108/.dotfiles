@@ -1,0 +1,114 @@
+configuration {
+	show-icons: false;
+	location: 0;
+	font: "Pixellari 20";
+	display-drun: "»";
+}
+
+//   cream: #FFFEE0;
+//   coolGray: #838EB3;
+//   raisinBlack: #2F3041;
+//   night: #101216;
+
+* {
+	flashWhite: #EDEBEE;
+	orchidPink: #ECB8C5;
+	ultraViolet: #5E6181;
+	charcoal: #3F475B;
+	background-color: @charcoal;
+	border-color: @charcoal;
+	text-color: @orchidPink;
+	border-radius: 10px;
+}
+
+window { 
+	width: 40%;
+	background-color: @ultraViolet;
+	orientation: vertical;
+	border-color: @ultraViolet;
+  	border-radius: 10px;
+}
+
+
+// ELEMENT
+// -----------------------------------
+  
+element {
+	padding: 4 12;
+	text-color: #EFE7DD;
+	orientation: horizontal;
+}
+
+element selected normal {
+	background-color: @ultraViolet;
+	text-color: @flashWhite;
+}
+
+element normal normal, element alternate normal {
+	background-color: @charcoal;
+	text-color: @orchidPink;
+}
+
+element-icon {
+	size: 32 px;
+	background-color: inherit;
+	padding: 0 2 0 0;
+	alignment: vertical;
+}
+
+listview {
+	columns: 1;
+	lines: 6;
+	padding: 8 0;
+	fixed-height: true;
+	fixed-columns: true;
+	fixed-lines: true;
+	border: 0 10 0 10;
+	border-color: inherit;
+	scrollbar: false;
+}
+
+// INPUT BAR 
+//------------------------------------------------
+
+entry {
+	text-color: #EFE7DD;
+	padding: 10 10 0 0;
+	margin: 0 -2 0 0;
+	placeholder: "";
+	placeholder-color: @orchidPink;
+}
+
+num-filtered-rows, num-rows, textbox-num-sep {
+    text-color: @orchidPink;
+	enabled: false;
+}
+
+inputbar {
+	// background-image: url("~/.config/rofi/sk.gif",both);
+	// padding: 380 0 0;
+	padding: 0 0 0 0;
+	margin: 10 0 0 0;
+	text-color: @charcoal;
+	enabled: false;
+} 
+
+prompt {
+	text-color: @orchidPink;
+	padding: 5 0 0 10;
+	margin: 0 0 0 0;
+	font: "Pixellari 24";
+  	enabled: false;
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 # Fonts file
 
-## Intstalation
+## installation
 
 ``` bash
 cd ~/.local/share/fonts/
