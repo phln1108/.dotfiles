@@ -186,7 +186,7 @@ focus_follows_mouse no
 # finds out, if available)
 bar {
 	position top
-	status_command i3status
+	status_command i3status -c /home/$USER/.config/i3status/i3status.conf
 }
 
 #remove border
