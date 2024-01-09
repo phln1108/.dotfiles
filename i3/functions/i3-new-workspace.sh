@@ -33,15 +33,19 @@ while [ $# -gt 0 ] ; do
     esac
     shift
 done
+actual=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).output' | cut -d"\"" -f2)
+
+monitor=$(~/.dotfiles/i3/functions/find-monitor-name.sh $actual)
 
 ws_json=$($msg_cmd -t get_workspaces)
 for i in {1..10} ; do
-    [[ $ws_json =~ \"num\":\ ?$i ]] && continue
-
+    go=$((i+(10*(monitor-1))))
+    [[ $ws_json =~ \"num\":\ ?$go ]] && continue
+    
     case $opt_mode in
-        "new") $msg_cmd workspace number "$i" ;;
-        "move") $msg_cmd move container to workspace number "$i" ;;
-        "carry") $msg_cmd move container to workspace number "$i", workspace number "$i" ;;
+        "new") $msg_cmd workspace number "$go" ;;
+        "move") $msg_cmd move container to workspace number "$go" ;;
+        "carry") $msg_cmd move container to workspace number "$go", workspace number "$go" ;;
     esac
     break
 done

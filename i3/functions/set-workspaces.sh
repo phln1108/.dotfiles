@@ -5,8 +5,8 @@ monitors=$($findMonitors)
 ws=1
 for((i=1; i<=monitors; i++)); do
     monitor=$($findMonitors $i)
-    for y in {1..10}; do
-        echo $ws
-        ws=$((ws+1))
+    i3-msg workspace "$ws",move workspace to output "$monitor"
+    ws=$((ws+10))
     done
+    i3-msg workspace 1
 done

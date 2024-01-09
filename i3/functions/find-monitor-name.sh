@@ -30,5 +30,14 @@ done < <(xrandr --prop | awk '
 
 case $1 in
     "") echo $count;;
-    *) echo ${monitors[$1]};;
+    *)  if [[ "${monitors[$1]}" = $1 ]]; then
+            for i in "${!monitors[@]}"; do
+                if [[ "${monitors[$i]}" = $1 ]]; then
+                    echo "${i}";
+                fi
+            done
+        else
+            echo ${monitors[$1]}
+        fi
+    ;;
 esac;
