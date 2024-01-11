@@ -40,7 +40,7 @@ monitor=$(~/.dotfiles/i3/functions/find-monitor-name.sh $actual)
 ws_json=$($msg_cmd -t get_workspaces)
 for i in {1..10} ; do
     go=$((i+(10*(monitor-1))))
-    [[ $ws_json =~ \"num\":\ ?$go ]] && continue
+    [[ $ws_json =~ \"num\":\ ?$go, ]] && continue
     
     case $opt_mode in
         "new") $msg_cmd workspace number "$go" ;;

@@ -32,7 +32,7 @@ while [ $# -gt 0 ] ; do
 done
 
 actual_num=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
-monitor=$(($actual_num / 10))
+monitor=$((($actual_num-1) / 10))
 ws_json=$(i3-msg -t get_workspaces)
 for i in {1..10} ; do
     go=$((i*inc+actual_num))
@@ -42,7 +42,7 @@ for i in {1..10} ; do
         go=$((go+10))
     fi
     echo $go
-    [[ $ws_json =~ \"num\":\ ?$go ]] || continue
+    [[ $ws_json =~ \"num\":\ ?$go, ]] || continue
     
 
     case $carry in
