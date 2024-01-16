@@ -161,7 +161,7 @@ focus_follows_mouse no
 bar {
 	position top
 	# status_command i3status -c ~/.config/i3/i3status.conf
-	status_command /home/ph/.dotfiles/i3/functions/status.sh
+	status_command $functions_path/status.sh
 }
 
 #remove border

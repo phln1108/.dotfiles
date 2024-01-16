@@ -14,5 +14,6 @@ if [ "$usr" = "DTEC65048486" ]; then
     xrandr --output DP-1 --pos 0x0 --output VGA-1 --pos 1920x256
     xrandr --output DP-1 --pos 0x0 --output VGA-1 --pos 1920x256
     
-    run "picom" --config ~/.config/picom/picom.conf
 fi
+
+    run "picom" --config ~/.config/picom/picom.conf
