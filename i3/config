@@ -160,7 +160,8 @@ focus_follows_mouse no
 # finds out, if available)
 bar {
 	position top
-	status_command i3status -c ~/.config/i3/i3status.conf
+	# status_command i3status -c ~/.config/i3/i3status.conf
+	status_command /home/ph/.dotfiles/i3/functions/status.sh
 }
 
 #remove border
@@ -178,6 +179,6 @@ exec_always feh --bg-fill ~/.dotfiles/awesome/themes/mytheme/wallpapers/backgrou
 exec_always "setxkbmap -layout us,br -variant intl, -option grp:alt_shift_toggle"
 
 #picom
-exec_always picom
+# exec_always picom
 
 exec_always $functions_path/start-config.sh

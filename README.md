@@ -7,6 +7,7 @@
 * kitty (terminal)
 * flameshot (screenshot)
 * picom (compositor)
+* pls (terminal todo list)
 
 ## instalation
 
