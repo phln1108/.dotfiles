@@ -1,5 +1,8 @@
 #!/bin/bash
 
+i3_path=~/.config/i3
+functions_path=~/.config/i3/functions
+
 run() {
     if ! pgrep -f "$1"; then
         "$@" &
@@ -15,4 +18,7 @@ if [ "$usr" = "DTEC65048486" ]; then
     
 fi
 
-    run "picom" --config ~/.config/picom/picom.conf
+killall loop_pngs.sh
+$($functions_path/loop_pngs.sh $i3_path/animated_background) &
+# run "$functions_path/loop_pngs.sh" $i3_path/animated_background
+run "picom" --experimental-backends --config ~/.config/picom/picom.conf

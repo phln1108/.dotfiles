@@ -10,6 +10,9 @@ For installing i3 config, you have to follow the "Mine configuration files" guid
 
 * brightnessctl (change brightness)
 * pactl (Control PulseAudio)
+* feh (background)
+* imagemagick (build animated wallpaper)
+* xdotool (get current workspace)
 
 ### addons functions
 

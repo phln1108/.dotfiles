@@ -7,6 +7,7 @@ set $sup Mod4
 set $mod Mod1
 
 #add-on functions path
+set $i3_path ~/.config/i3
 set $functions_path ~/.config/i3/functions
 
 #rofi config path
@@ -178,12 +179,11 @@ default_border pixel 0
 #smart_borders on
 
 #wallpaper
-exec_always feh --bg-fill ~/.dotfiles/awesome/themes/mytheme/wallpapers/background2.png
+bindsym $sup+Shift+p exec "$functions_path/change-background.sh $rofipm"
 
 #keyboard layout (change between us and br)
 exec_always "setxkbmap -layout us,br -variant intl, -option grp:alt_shift_toggle"
 
 #picom
-# exec_always picom
 
-exec_always $functions_path/start-config.sh
+exec_always "$functions_path/start-config.sh $i3_path $functions_path"
