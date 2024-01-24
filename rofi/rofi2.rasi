@@ -3,6 +3,7 @@ configuration {
 	location: 0;
 	font: "Pixellari 16";
 	display-drun: "»";
+	display-window: "»";
 }
 
 //   cream: #FFFEE0;
