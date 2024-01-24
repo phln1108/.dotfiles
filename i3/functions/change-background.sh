@@ -1,25 +1,28 @@
 #!/bin/bash
 
-path=~/.config/i3
+source ~/.config/i3/functions/consts.sh
 
 gifs=$(ls $path/gifs)
 echo $gifs
 res=$(echo $gifs | rofi -sep ' ' -config $1 -dmenu);
 
-workspace=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
+echo $res
 
-# "i3-msg" workspace 0 
+if [[ $res = "" ]]; then
+    notify-send "Operation Canceled" 
+else
+    notify-send "Wallpaper is updating, please don't go to a empty workspace" 
 
-kitty -o allow_remote_control=yes cbonsai -l -i -m "waiting for loading background :D" &
+    WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) "" 2>/dev/null)
+    num=$(echo -n "$WINDOWS" | wc -m)
 
-# "$path/functions/i3-new-workspace.sh" -c
+    if [[ $num = 0 ]]; then
+        kitty -o allow_remote_control=yes cbonsai -l -i -m "waiting for loading background :D" &
+    fi
+        
+    $path/functions/generate_pngs.sh $path/gifs/$res $path/animated_background/
 
-
-$path/functions/generate_pngs.sh $path/gifs/$res $path/animated_background/
-
-notify-send "Wallpaper changed to $res successfully" 
-kill $!
-
-sleep 2
-
-i3-msg workspace number "$workspace"
+    notify-send "Wallpaper changed to $res successfully" 
+    
+    kill $!
+fi
