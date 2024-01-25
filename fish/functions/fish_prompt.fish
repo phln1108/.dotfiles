@@ -39,10 +39,10 @@ function fish_prompt
         end
     end
 
-	# set -l emoji " " 🐧 " "
+	set -l emoji " " 🐧 " "
     # set -l emoji " " 🦆 " "
     # set -l emoji " " 🐼 " "
-    set -l emoji " " 🐳 " "
+    # set -l emoji " " 🐳 " "
     # Shorten pwd if prompt is too long
     set -l pwd (prompt_pwd)
 
