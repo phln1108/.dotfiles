@@ -14,8 +14,7 @@ echo $usr
 #settings for computer from vortex
 if [ "$usr" = "DTEC65048486" ]; then
     xrandr --output DP-2 --pos 0x0 --primary --output VGA-1 --pos 1920x256
-    
-    
+    # polybar example --config=~/.config/polybar/config.ini 2>&1 | tee -a /tmp/polybar1.log & disown
 fi
 
 killall loop_pngs.sh
