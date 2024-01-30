@@ -9,6 +9,8 @@ run() {
     fi
 }
 
+killall polybar
+
 usr=$(hostname)
 echo $usr
 #settings for computer from vortex

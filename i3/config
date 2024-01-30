@@ -166,8 +166,9 @@ bar {
 	# status_command i3status -c ~/.config/i3/i3status.conf
 	status_command $functions_path/status.sh
 	mode hide
-	tray_output primary
+	tray_output none
 	separator_symbol ⁞
+	
 }
 
 #remove border
