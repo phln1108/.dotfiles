@@ -1,7 +1,8 @@
 # Mine configuration files :D
 
-## To dowload
+## Im using
 
+* i3 (WM)
 * rofi (app laucher)
 * fish (shell)
 * kitty (terminal)
