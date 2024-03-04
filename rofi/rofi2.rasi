@@ -40,7 +40,12 @@ element {
 	orientation: horizontal;
 }
 
-element selected normal {
+element.alternate.active, element normal active {
+	background-color: @charcoal;
+	text-color: @orchidPink;
+}
+
+element selected normal, element selected active  {
 	background-color: @ultraViolet;
 	text-color: @flashWhite;
 }
