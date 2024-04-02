@@ -1,0 +1,68 @@
+{
+    "python.defaultInterpreterPath": "python3",
+    "cmake.showOptionsMovedNotification": false,
+    "C_Cpp.intelliSenseUpdateDelay": 500,
+    "security.workspace.trust.untrustedFiles": "open",
+    "idf.espIdfPath": "/home/ph/esp/esp-idf",
+    "idf.pythonBinPath": "/home/ph/.espressif/python_env/idf5.2_py3.10_env/bin/python",
+    "idf.toolsPath": "/home/ph/.espressif",
+    "idf.customExtraPaths": "/home/ph/.espressif/tools/xtensa-esp-elf-gdb/12.1_20231023/xtensa-esp-elf-gdb/bin:/home/ph/.espressif/tools/riscv32-esp-elf-gdb/12.1_20231023/riscv32-esp-elf-gdb/bin:/home/ph/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:/home/ph/.espressif/tools/riscv32-esp-elf/esp-13.2.0_20230928/riscv32-esp-elf/bin:/home/ph/.espressif/tools/esp32ulp-elf/2.35_20220830/esp32ulp-elf/bin:/home/ph/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/bin:/home/ph/.espressif/tools/esp-rom-elfs/20230320",
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "/home/ph/.espressif/tools/openocd-esp32/v0.12.0-esp32-20230921/openocd-esp32/share/openocd/scripts",
+        "ESP_ROM_ELF_DIR": "/home/ph/.espressif/tools/esp-rom-elfs/20230320/"
+    },
+    "idf.gitPath": "git",
+    "explorer.confirmDragAndDrop": false,
+    //terminal
+    // "terminal.integrated.fontFamily": "Pixellari",
+    "terminal.integrated.fontFamily": "GohuFont uni11 Nerd Font Mono",
+    "terminal.integrated.fontSize": 16,
+    //editor
+    // "editor.fontFamily": "GohuFont uni11 Nerd Font Mono",
+    // "editor.fontFamily": "small pixel7",
+    // "editor.fontSize": 16,
+    "editor.renderLineHighlight": "gutter",
+    // "workbench.activityBar.location": "hidden"
+    "workbench.statusBar.visible": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Tokyo Night",
+    "editor.tokenColorCustomizations": {
+        "[Tokyo Night]": { // or "[Tokyo Night Storm]"
+            "textMateRules": [
+            {
+                "scope": [
+                    "comment keyword.codetag.notation",
+                    "comment.block.documentation keyword",
+                    "comment.block.documentation storage.type.class"
+                ],
+                "settings": {
+                    "foreground": "#bb9af7"
+                }
+            },
+            {
+                "scope": ["comment.block.documentation entity.name.type.instance"],
+                "settings": {
+                    "foreground": "#73daca",
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": [
+                "comment.block.documentation entity.name.type punctuation.definition.bracket"
+                ],
+                "settings": {
+                    "foreground": "#bb9af7"
+                }
+            },
+            {
+                "scope": ["comment.block.documentation variable"],
+                "settings": {
+                    "foreground": "#e0af68",
+                    "fontStyle": "italic"
+                }
+            }
+            ]
+        }
+      }
+
+}
