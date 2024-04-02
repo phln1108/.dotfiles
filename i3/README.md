@@ -22,7 +22,7 @@ link command:
 
 ```bash
 
-ln -s ln -s ~/.dotfile/i3/functions/[file of the function] ~/bin/[file of the function]
+ln -s ~/.dotfile/i3/functions/[file of the function] ~/bin/[file of the function]
 
 ```
 
