@@ -11,21 +11,21 @@ configuration {
 //   night: #101216;
 
 * {
-	flashWhite: #EDEBEE;
-	orchidPink: #ECB8C5;
-	ultraViolet: #5E6181;
-	charcoal: #3F475B;
-	background-color: @charcoal;
-	border-color: @charcoal;
-	text-color: @orchidPink;
+	Selected-text: #bb9af7;
+	Normal-text: #9aa5ce;
+	Foregroung-block: #24283b;
+	Background-block: #1a1b26;
+	background-color: @Background-block;
+	border-color: @Background-block;
+	text-color: @Normal-text;
 	border-radius: 10px;
 }
 
 window { 
 	width: 40%;
-	background-color: @ultraViolet;
+	background-color: @Foregroung-block;
 	orientation: vertical;
-	border-color: @ultraViolet;
+	border-color: @Foregroung-block;
   	border-radius: 10px;
 }
 
@@ -40,13 +40,13 @@ element {
 }
 
 element selected normal {
-	background-color: @ultraViolet;
-	text-color: @flashWhite;
+	background-color: @Foregroung-block;
+	text-color: @Selected-text ;
 }
 
 element normal normal, element alternate normal {
-	background-color: @charcoal;
-	text-color: @orchidPink;
+	background-color: @Background-block;
+	text-color: @Normal-text;
 }
 
 element-icon {
@@ -76,11 +76,11 @@ entry {
 	padding: 10 10 0 0;
 	margin: 0 -2 0 0;
 	placeholder: "";
-	placeholder-color: @orchidPink;
+	placeholder-color: @Normal-text;
 }
 
 num-filtered-rows, num-rows, textbox-num-sep {
-    text-color: @orchidPink;
+    text-color: @Normal-text;
 	enabled: false;
 }
 
@@ -89,12 +89,12 @@ inputbar {
 	// padding: 380 0 0;
 	padding: 0 0 0 0;
 	margin: 10 0 0 0;
-	text-color: @charcoal;
+	text-color: @Background-block;
 	enabled: false;
 } 
 
 prompt {
-	text-color: @orchidPink;
+	text-color: @Normal-text;
 	padding: 5 0 0 10;
 	margin: 0 0 0 0;
 	font: "Pixellari 24";

@@ -1,17 +1,3 @@
-
-Skip to content
-All gists
-Back to GitHub
-@phln1108
-@PieterjanMontens
-PieterjanMontens/Dunst config
-Last active November 22, 2022 19:57 • Report abuse
-
-Code
-Revisions 2
-Stars 1
-Dunst config file
-Dunst config
 [global]
     font = Pixellari 14
 
@@ -184,21 +170,21 @@ Dunst config
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-    frame_color = "#191311"
-    foreground = "#49ada7"
-    background = "#191311"
+    frame_color = "#1a1b26"
+    foreground = "#2ac3de"
+    background = "#1a1b26"
     timeout = 3
 
 [urgency_normal]
-    frame_color = "#191311"
-    foreground = "#6ab445"
-    background = "#191311"
+    frame_color = "#1a1b26"
+    foreground = "#bb9af7"
+    background = "#1a1b26"
     timeout = 7
 
 [urgency_critical]
-    frame_color = "#191311"
-    foreground = "#a35134"
-    background = "#191311"
+    frame_color = "#1a1b26"
+    foreground = "#f7768e"
+    background = "#1a1b26"
     timeout = 0
 
 
@@ -259,18 +245,3 @@ Dunst config
 #    summary = *twitter.com*
 #    urgency = normal
 #
-@phln1108
-Comment
-
-Leave a comment
-Footer
-© 2024 GitHub, Inc.
-Footer navigation
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact
-
