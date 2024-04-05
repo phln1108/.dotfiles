@@ -22,6 +22,7 @@
     // "editor.fontFamily": "small pixel7",
     // "editor.fontSize": 16,
     "editor.renderLineHighlight": "gutter",
+    // "editor.tabSize": 2,
     // "workbench.activityBar.location": "hidden"
     "workbench.statusBar.visible": false,
     "workbench.iconTheme": "material-icon-theme",
