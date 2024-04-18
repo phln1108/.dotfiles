@@ -9,7 +9,7 @@ fi
 
 if [ -z "$2" ]
 then
-    interval="0.1"
+    interval="0.15"
 else
     interval=$2
 fi

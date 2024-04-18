@@ -7,27 +7,31 @@ name="Animated wallpaper"
 
 gifs=$(ls $path/gifs)
 echo $gifs
+choice=$(echo "Static Gif" | rofi -sep ' ' -config $1 -dmenu)
+if [[ $choice = "" ]]; then
+    notify-send "$name" "Operation Canceled" --icon="$icon" 
+    exit
+fi
+
 res=$(echo $gifs | rofi -sep ' ' -config $1 -dmenu);
 
 echo $res
-
 if [[ $res = "" ]]; then
     notify-send "$name" "Operation Canceled" --icon="$icon" 
-else
-    killall loop_pngs.sh
-    notify-send "$name" "Wallpaper is updating!" --icon="$icon"  
-
-    # WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) "" 2>/dev/null)
-    # num=$(echo -n "$WINDOWS" | wc -m)
-
-    # if [[ $num = 0 ]]; then
-    #     kitty -o allow_remote_control=yes cbonsai -l -i -m "waiting for loading background :D" &
-    # fi
-        
-    $path/functions/generate_pngs.sh $path/gifs/$res $path/animated_background/
-
-    notify-send "$name" "Wallpaper changed to $res successfully" --icon="$icon" 
-    
-    # kill $!
-    $($path/functions/loop_pngs.sh $path/animated_background) &
+    exit
 fi
+killall loop_pngs.sh
+
+if [[ $choice = "Static" ]]; then
+    feh --no-fehbg --bg-fill $path/gifs/$res
+    notify-send "$name" "Wallpaper changed to $res successfully" --icon="$icon" 
+    exit
+fi
+
+notify-send "$name" "Wallpaper is updating!" --icon="$icon"  
+
+$path/functions/generate_pngs.sh $path/gifs/$res $path/animated_background/
+
+notify-send "$name" "Wallpaper changed to $res successfully" --icon="$icon" 
+
+$($path/functions/loop_pngs.sh $path/animated_background) &
