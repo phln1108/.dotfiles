@@ -6,9 +6,9 @@
 * rofi (app laucher)
 * fish (shell)
 * kitty (terminal)
-* flameshot (screenshot)
+* flameshot (screenshot app)
 * picom (compositor)
-* pls (terminal todo list)
+* pls (terminal to-do list)
 
 ## instalation
 
