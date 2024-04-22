@@ -1,30 +1,60 @@
 #!/bin/bash
 
-if [ -z "$1" ]
-then
-    pattern="*"
-else
-    pattern=$1/*
-fi
+interval="0.01"
+path=""
+static=0
+interrupt=0
 
-if [ -z "$2" ]
-then
-    interval="0.15"
-else
-    interval=$2
-fi
+function show_help {
+    echo "USAGE:"
+    echo "    loop_png [OPTION]"
+}
 
-while true;
-do
-    WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) "" 2>/dev/null)
-    num=$(echo -n "$WINDOWS" | wc -m)
-    if [[ $num = 0 ]]; then
-        for image in $pattern;
-        do
-            # echo $image
-            feh --no-fehbg --bg-fill $image && sleep $interval;
+while getopts "p:t:si" option; do
+    case $option in
+        p) path=$OPTARG;;
+        
+        t) interval=$OPTARG;;
+
+        s) static=1;;
+
+        i) interrupt=1;;
+
+        \?) # Invalid option
+            echo "Error: Invalid option";
+            exit;;
+   esac
+done
+
+echo $static
+echo $interval
+echo $path
+echo $interrupt
+
+if [ $static -eq 1 ]; then
+    feh --no-fehbg --bg-fill $path;
+else
+    if [ $interrupt -eq 1 ]; then
+        while true; do
+            WINDOWS=$(xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) "" 2>/dev/null)
+            num=$(echo -n "$WINDOWS" | wc -m)
+            if [[ $num = 0 ]]; then
+                images=$(ls $path)
+                for image in $images; do
+                    # echo $image
+                    feh --no-fehbg --bg-fill $path/$image && sleep $interval;
+                done
+            else
+                sleep 0.5;
+            fi
         done
     else
-        sleep 0.5;
+        while true; do
+            images=$(ls $path)
+            for image in $images; do
+                # echo $path/$image
+                feh --no-fehbg --bg-fill $path/$image && sleep $interval;
+            done
+        done
     fi
-done
+fi

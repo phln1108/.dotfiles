@@ -24,5 +24,6 @@ elif [ "$usr" = "localhost.localdomain"  ]; then
 fi
 
 killall loop_pngs.sh
-$($functions_path/loop_pngs.sh $i3_path/animated_background) &
+# $($functions_path/loop_pngs.sh $i3_path/animated_background) &
+$($functions_path/change-background.sh ~/.dotfiles/rofi/rofipm.rasi)
 # run "$functions_path/loop_pngs.sh" $i3_path/animated_background
