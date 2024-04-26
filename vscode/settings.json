@@ -13,6 +13,7 @@
     },
     "idf.gitPath": "git",
     "explorer.confirmDragAndDrop": false,
+    
     //terminal
     // "terminal.integrated.fontFamily": "Pixellari",
     "terminal.integrated.fontFamily": "GohuFont uni11 Nerd Font Mono",
@@ -22,50 +23,66 @@
     // "editor.fontFamily": "small pixel7",
     // "editor.fontSize": 16,
     "editor.renderLineHighlight": "gutter",
-    // "editor.tabSize": 2,
-    // "workbench.activityBar.location": "hidden"
+    // "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": false,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Tokyo Night Storm",
     "editor.tokenColorCustomizations": {
         "[Tokyo Night]": { // or "[Tokyo Night Storm]"
             "textMateRules": [
-            {
-                "scope": [
-                    "comment keyword.codetag.notation",
-                    "comment.block.documentation keyword",
-                    "comment.block.documentation storage.type.class"
-                ],
-                "settings": {
-                    "foreground": "#bb9af7"
+                {
+                    "scope": [
+                        "comment keyword.codetag.notation",
+                        "comment.block.documentation keyword",
+                        "comment.block.documentation storage.type.class"
+                    ],
+                    "settings": {
+                        "foreground": "#bb9af7"
+                    }
+                },
+                {
+                    "scope": [
+                        "comment.block.documentation entity.name.type.instance"
+                    ],
+                    "settings": {
+                        "foreground": "#73daca",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": [
+                        "comment.block.documentation entity.name.type punctuation.definition.bracket"
+                    ],
+                    "settings": {
+                        "foreground": "#bb9af7"
+                    }
+                },
+                {
+                    "scope": [
+                        "comment.block.documentation variable"
+                    ],
+                    "settings": {
+                        "foreground": "#e0af68",
+                        "fontStyle": "italic"
+                    }
                 }
-            },
-            {
-                "scope": ["comment.block.documentation entity.name.type.instance"],
-                "settings": {
-                    "foreground": "#73daca",
-                    "fontStyle": "italic"
-                }
-            },
-            {
-                "scope": [
-                "comment.block.documentation entity.name.type punctuation.definition.bracket"
-                ],
-                "settings": {
-                    "foreground": "#bb9af7"
-                }
-            },
-            {
-                "scope": ["comment.block.documentation variable"],
-                "settings": {
-                    "foreground": "#e0af68",
-                    "fontStyle": "italic"
-                }
-            }
             ]
         }
     },
     "git.enableSmartCommit": true,
-    "git.confirmSync": false
-
+    "git.confirmSync": false,
+    "glassit.alpha": 255,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[shellscript]": {
+        "editor.defaultFormatter": "shakram02.bash-beautify"
+    },
+    "redhat.telemetry.enabled": false,
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+    "C_Cpp.vcFormat.indent.braces": true,
+    "C_Cpp.vcFormat.indent.multiLineRelativeTo": "statementBegin",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}"
 }

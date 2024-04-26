@@ -21,11 +21,12 @@ if [[ $res = "" ]]; then
     exit
 fi
 
-time=$(echo "0.01s 0.05s 0.1s" | rofi -sep ' ' -config $1 -dmenu);
+time=$(echo "0.001s 0.01s 0.05s 0.1s" | rofi -sep ' ' -config $1 -dmenu);
 case $option in
     "0.01s") time=0.01;;
     "0.1s") time=0.1;;
     "0.05s") time=0.05;;
+    "0.001s") time=0.001;;
     \?) # Invalid option
         notify-send "$name" "Operation Canceled" --icon="$icon"
         exit;;
