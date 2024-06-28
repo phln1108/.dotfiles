@@ -14,7 +14,7 @@ killall polybar
 usr=$(hostname)
 echo $usr
 #settings for computer from vortex
-if [ "$usr" = "DTEC65048486" ]; then
+if [ "$usr" = "VRP65048486" ]; then
     xrandr --output DP-2 --pos 0x0 --primary --output VGA-1 --pos 1920x256
     run "picom" --experimental-backends --config ~/.config/picom/picom.conf
     # polybar example --config=~/.config/polybar/config.ini 2>&1 | tee -a /tmp/polybar1.log & disown

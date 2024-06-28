@@ -15,13 +15,12 @@
     "explorer.confirmDragAndDrop": false,
     
     //terminal
-    // "terminal.integrated.fontFamily": "Pixellari",
     "terminal.integrated.fontFamily": "GohuFont uni11 Nerd Font Mono",
     "terminal.integrated.fontSize": 16,
     //editor
     // "editor.fontFamily": "GohuFont uni11 Nerd Font Mono",
-    // "editor.fontFamily": "small pixel7",
-    // "editor.fontSize": 16,
+    "editor.fontFamily": "ProFont IIx Nerd Font Mono", 
+    "editor.fontSize": 13,
     "editor.renderLineHighlight": "gutter",
     // "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": false,
@@ -84,5 +83,6 @@
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
-    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}"
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+    "java.debug.settings.vmArgs": "-Xmx2048m"
 }
