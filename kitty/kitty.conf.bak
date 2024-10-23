@@ -1,5 +1,6 @@
 shell fish
-# font_family GohuFont uni11 Nerd Font Mono
+
+font_family GohuFont uni11 Nerd Font Mono
 # bold_font Cousine Nerd Font Mono:style=Bold 
 # italic_font Cousine Nerd Font Mono:style=Italic
 # bold_italic_font Cousine Nerd Font Mono:style=Bold Italic
@@ -11,10 +12,3 @@ background_opacity 0.9
 confirm_os_window_close 0
 
 include theme.conf
-
-# BEGIN_KITTY_FONTS
-font_family      family="ProFontWindows Nerd Font"
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
-# END_KITTY_FONTS

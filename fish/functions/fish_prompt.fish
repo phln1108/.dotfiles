@@ -39,7 +39,8 @@ function fish_prompt
         end
     end
 
-	set -l emoji " " 🐧 " "
+	set -l emoji "(O_O) "
+	# set -l emoji " " 🐧 " "
     # set -l emoji " " 🦆 " "
     # set -l emoji " " 🐼 " "
     # set -l emoji " " 🐳 " "

@@ -1,3 +1,4 @@
 function fish_greeting
-	pls
+	# pls
+	# neofetch
 end

@@ -25,7 +25,6 @@
     // "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": false,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Tokyo Night Storm",
     "editor.tokenColorCustomizations": {
         "[Tokyo Night]": { // or "[Tokyo Night Storm]"
             "textMateRules": [
@@ -84,5 +83,7 @@
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
-    "java.debug.settings.vmArgs": "-Xmx2048m"
+    "java.debug.settings.vmArgs": "-Xmx2048m",
+    "workbench.colorTheme": "Tokyo Night",
+    "explorer.confirmDelete": false
 }
